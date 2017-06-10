@@ -19,13 +19,13 @@ class PodcastController extends Controller
 
     /* Display Podcast Page */ 
     public function index(){
-        $podcasts = DB::table('podcasts')->paginate(2);
+        $podcasts = DB::table('podcasts')->paginate(10);
         return view('user.podcast.index', compact('podcasts'));
     }
 
     /* Display Single Podcast Page */
-    public function show($id){
-        $podcast = Podcast::get()->where('id',$id);
+    public function show($title){
+        $podcast = Podcast::get()->where('seo_title',$title);
         return view('user.podcast.show',compact('podcast'));
     }
 

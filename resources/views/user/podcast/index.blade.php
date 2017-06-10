@@ -7,14 +7,14 @@
                 <div class="row">
                     <div class="col-md-3 col-sm-12">
                         <div class="image">
-                            <a href="{{ route('podcast.show',[ 'id' => $podcast->id ]) }}">
+                            <a href="{{ route('podcast.show',[ 'title' => $podcast->seo_title ]) }}">
                                 <img src="{!! \Illuminate\Support\Facades\Storage::url('uploads/images/'.$podcast->poster) !!}" alt="" height="200" width="350">
                             </a>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <h3>
-                            <a href="{{ route('podcast.show',[ 'id' => $podcast->id ]) }}">{{ $podcast->title }}</a>
+                            <a href="{{ route('podcast.show',[ 'title' => $podcast->seo_title ]) }}">{{ $podcast->title }}</a>
                         </h3>
 
                         {{--<h4>--}}

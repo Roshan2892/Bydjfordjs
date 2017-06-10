@@ -48,7 +48,7 @@
                     <ul class="nav navbar-nav">
                         @if (Auth::guest())
                         @else
-                            <li><a href="{{ route('admin.music.show') }}">Albums</a></li>
+                            <li><a href="{{ route('admin.music.show') }}">Music</a></li>
                             <li><a href="{{ route('admin.video.show') }}">Videos</a></li>
                             <li><a href="{{ route('admin.podcast.show') }}">Podcast</a></li>
                             <li><a href="{{ route('admin.news.show') }}">News</a></li>

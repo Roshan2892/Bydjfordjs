@@ -15,15 +15,21 @@ class MusicController extends Controller
 
     /******************************** User Side *****************************/
 
-    /* Display Music Page */
-    public function index(){
-        $musics = DB::table('albums')->paginate(2);
-        return view('user.music.index', compact('musics'));
+    /* Display Singles Page */
+    public function showSingles(){
+        $musics = DB::table('albums')->where('filecount','=',1)->paginate(10);
+        return view('user.music.singles', compact('musics'));
+    }
+
+    /* Display Albums Page */
+    public function showAlbum(){
+        $musics = DB::table('albums')->where('filecount','>',1)->paginate(10);
+        return view('user.music.albums', compact('musics'));
     }
 
     /* Display Single Music Page*/
-    public function show($id){
-        $music = Album::get()->where('id',$id);
+    public function show($title){
+        $music = Album::get()->where('seo_title',$title);
         return view('user.music.show',compact('music'));
     }
 

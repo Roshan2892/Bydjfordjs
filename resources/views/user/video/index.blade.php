@@ -10,14 +10,14 @@
                 <div class="row">
                     <div class="col-md-2 col-sm-12" >
                         <div class="image" style="background:white;">
-                            <a href="{{ route('video.show',[ 'id' => $video->id ]) }}">
+                            <a href="{{ route('video.show',[ 'title' => $video->seo_title ]) }}">
                                 <img src="{{ \Illuminate\Support\Facades\Storage::url('uploads/images/'.$video->poster) }}" alt="" height="150" width="250">
                             </a>
                         </div>
                     </div>
                     <div class="col-md-offset-1 col-md-9 col-sm-12">
                         <div class="container">
-                            <a href="{{ route('video.show',[ 'id' => $video->id ]) }}">{{ $video->title }}</a>
+                            <a href="{{ route('video.show',[ 'title' => $video->seo_title ]) }}">{{ $video->title }}</a>
 
                         </div>
                         {{--<div class="container">--}}

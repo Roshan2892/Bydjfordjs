@@ -30,8 +30,8 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Music <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="{{ route('singles.index') }}">Albums</a></li>
-                            <li><a href="{{ route('albums.index') }}">Singles</a></li>
+                            <li><a href="{{ route('singles.index') }}">Singles</a></li>
+                            <li><a href="{{ route('albums.index') }}">Albums</a></li>
                         </ul>
                     </li>
                     <li><a href="{{ route('video.index') }}">Video</a></li>

@@ -26,22 +26,22 @@ Route::get('/contact', ['as'=>'contact.index','uses'=>'ContactController@index']
 Route::post('/contact', ['as'=>'contact.send','uses'=>'ContactController@sendMail']);
 
 /*********** Video ***************/
-Route::get('/video/{id}', ['as' => 'video.show', 'uses'=>'VideoController@show']);
+Route::get('/video/{title}', ['as' => 'video.show', 'uses'=>'VideoController@show']);
 Route::get('/video', ['as' => 'video.index', 'uses'=>'VideoController@index']);
 
 /*********** Music ***************/
-Route::get('/music/{id}', ['as' => 'music.show', 'uses'=>'MusicController@show']);
-Route::get('/singles', ['as' => 'singles.index', 'uses'=>'MusicController@index']);
-Route::get('/albums', ['as' => 'albums.index', 'uses'=>'MusicController@index']);
+Route::get('/music/singles', ['as' => 'singles.index', 'uses'=>'MusicController@showSingles']);
+Route::get('/music/albums', ['as' => 'albums.index', 'uses'=>'MusicController@showAlbum']);
+Route::get('/music/{title}', ['as' => 'music.show', 'uses'=>'MusicController@show']);
 Route::get('/music/download/{id}',[ 'as' => 'music.download', 'uses'=>'MusicController@download' ]);
 
 /********** Podcast **************/
-Route::get('/podcast/{id}', ['as' => 'podcast.show', 'uses'=>'PodcastController@show']);
+Route::get('/podcast/{title}', ['as' => 'podcast.show', 'uses'=>'PodcastController@show']);
 Route::get('/podcast', ['as' => 'podcast.index', 'uses'=>'PodcastController@index']);
 Route::get('/podcast/download/{id}',['as' =>'podcast.download', 'uses'=>'PodcastController@download']);
 
 /********** News ******************/
-Route::get('/news/{id}', ['as' => 'news.show', 'uses'=>'NewsController@show']);
+Route::get('/news/{title}', ['as' => 'news.show', 'uses'=>'NewsController@show']);
 Route::get('/news', ['as' => 'news.index', 'uses'=>'NewsController@index']);
 
 /********** Mails *****************/

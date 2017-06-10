@@ -17,13 +17,13 @@ class VideoController extends Controller
 
     /* Display Video Page */
     public function index(){
-        $videos = DB::table('videos')->paginate(2);
+        $videos = DB::table('videos')->paginate(10);
         return view('user.video.index', compact('videos'));
     }
 
     /* Display Single Video Page */
-    public function show($id){
-        $video = Video::get()->where('id',$id);
+    public function show($title){
+        $video = Video::get()->where('seo_title',$title);
         return view('user.video.show',compact('video'));
     }
 

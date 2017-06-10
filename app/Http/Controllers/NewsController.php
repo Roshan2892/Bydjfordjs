@@ -22,8 +22,8 @@ class NewsController extends Controller
     }
 
     /* Display Single News Page */
-    public function show($id){
-        $news = News::get()->where('id',$id);
+    public function show($title){
+        $news = News::get()->where('seo_title',$title);
         return view('user.news.show',compact('news'));
     }
     

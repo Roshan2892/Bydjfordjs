@@ -91,11 +91,13 @@
                         <div class="sm2-playlist-wrapper">
                             <ul class="sm2-playlist-bd">
                                @foreach(unserialize($details->file) as $file)
-                                    <li>
-                                        <a href="{{ \Illuminate\Support\Facades\Storage::url('uploads/files/'.$file) }} ">
-                                            <b>{{ $details->title }}</b>
-                                        </a>
-                                    </li>
+                                    {{--@foreach(unserialize($details->filename) as $filename)--}}
+                                        <li>
+                                            <a href="{{ \Illuminate\Support\Facades\Storage::url('uploads/files/'.$file) }} ">
+                                                <b>{!!  $file !!}</b>
+                                            </a>
+                                        </li>
+                                    {{--@endforeach--}}
                                 @endforeach
                             </ul>
                         </div>

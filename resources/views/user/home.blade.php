@@ -20,7 +20,7 @@
                         @if(count($singles))
                             @foreach($singles as $music)
                                 <div class="container">
-                                    <a href="{{ route('music.show',[ ' id' => $music->id ]) }}">
+                                    <a href="{{ route('music.show',[ 'title' => $music->seo_title ]) }}">
                                         <img src="{{  \Illuminate\Support\Facades\Storage::url('uploads/images/'.$music->poster) }}" width="250" height="150" alt="Poster">
                                         <h3>{{ $music->title }}</h3>
                                     </a>
@@ -41,7 +41,7 @@
                         @if(count($albums))
                             @foreach($albums as $music)
                                 <div class="container">
-                                    <a href="{{ route('music.show',[ ' id' => $music->id ]) }}">
+                                    <a href="{{ route('music.show',[ 'title' => $music->seo_title ]) }}">
                                         <img src="{{  \Illuminate\Support\Facades\Storage::url('uploads/images/'.$music->poster) }}" width="250" height="150" alt="Poster">
                                         <h3>{{ $music->title }}</h3>
                                     </a>
@@ -62,7 +62,7 @@
                         @if(count($videos))
                             @foreach($videos as $video)
                                 <div class="container">
-                                    <a href="{{ route('video.show',[ ' id' => $video->id ]) }}">
+                                    <a href="{{ route('video.show',[ 'title' => $video->seo_title ]) }}">
                                         <img src="{{  \Illuminate\Support\Facades\Storage::url('uploads/images/'.$video->poster) }}" width="250" height="150" alt="Poster">
                                         <h3>{{ $video->title }}</h3>
                                     </a>
@@ -83,7 +83,7 @@
                         @if(count($podcast))
                             @foreach($podcast as $pod)
                                 <div class="container">
-                                    <a href="{{ route('podcast.show',[ ' id' => $pod->id ]) }}">
+                                    <a href="{{ route('podcast.show',[ 'title' => $pod->seo_title ]) }}">
                                         <img src="{{  \Illuminate\Support\Facades\Storage::url('uploads/images/'.$pod->poster) }}" width="250" height="150" alt="Poster">
                                         <h3>{{ $pod->title }}</h3>
                                     </a>
@@ -110,7 +110,7 @@
                         @if(count($news))
                             @foreach($news as $new)
                                 <div class="container">
-                                    <a href="{{ route('news.show',[ ' id' => $new->id ]) }}">
+                                    <a href="{{ route('news.show',[ 'title' => $new->seo_title ]) }}">
                                         <img src="{{  \Illuminate\Support\Facades\Storage::url('uploads/images/'.$new->poster) }}" width="250" height="150" alt="Poster">
                                         <h3>{{ $new->title }}</h3>
                                     </a>

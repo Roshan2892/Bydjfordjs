@@ -6,7 +6,8 @@
         <a href="{{ route('admin.music.show') }}"><i class="glyphicon glyphicon-fast-backward"></i> Back</a>
         <div class="row">
             <div class="col-md-offset-1 col-md-10" style="background: #eae7e7;padding:25px;">
-                <h1>Albums</h1>
+                <h1>Music</h1>
+                <span>* If more than one file is uploaded, it will taken as album</span>
                 @if (count($errors) > 0)
                     <div class="alert alert-danger">
                         <ul>
