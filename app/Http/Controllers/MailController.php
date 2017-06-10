@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Input;
 
 class MailController extends Controller
 {
+
+    public function __construct(){
+        $this->middleware('auth:admin')->except('subscribe', 'confirmSubscriptions');
+    } 
     /**
      * Show the application dashboard.
      *
@@ -45,6 +49,8 @@ class MailController extends Controller
                 'subscribed' => 'no'
             ]);
         }
+
+        return redirect()->back();
     }
 
     public function confirmSubscriptions(Request $request)
@@ -76,13 +82,25 @@ class MailController extends Controller
         }
     }
 
-    public function showMailForm($value='')
+    public function showMailForm()
     {
-        // return view('')
+        return view('admin.mails.mail');
     }
 
-    public function sendBulkMails($value='')
+    public function sendBulkMails(Request $request)
     {
-        # code...
+        $subject = $request['subject'];
+        $message = $request['description'];
+
+        $mailgun = new Mailgun(env('MAILGUN_KEY'));
+
+        $mailgun->sendMessage(env('MAILGUN_DOMAIN'), [
+            'from'      => 'noreply@bydjfordjs.in',
+            'to'        => env('MAILGUN_LIST'),
+            'subject'   => $subject,
+            'html'      => "{$message} <br><br><a href=\"%unsubcribe_url%\">Unsubcsribe</a>"
+        ]);
+
+        return redirect()->back();
     }
 }

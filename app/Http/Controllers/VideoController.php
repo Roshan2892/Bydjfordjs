@@ -58,15 +58,20 @@ class VideoController extends Controller
 
             $data = serialize($request->file);
             $tags = serialize($request->tags);
-            if(Video::create([
-                    'title' => $request->title,
-                    'description' => $request->description,
-                    'poster' => $fileName,
-                    'file' => $data,
-                    'artist' => $request->artist,
-                    'tags' => $tags,
-                    'language' => $request->language
-                ])) {
+
+            $video = new Video;
+            $video->title = $request->title;
+            $video->description = $request->description;
+            $video->poster = $fileName;
+            $video->file = $data;
+            $video->artist = $request->artist;
+            $video->tags = $tags;
+            $video->language = $request->language;
+            $video->save();
+            $video->seo_title = "video_page_".$video->id;
+            $video->save();
+
+            if($video){
                 Storage::put($destinationPath, file_get_contents($file->getRealPath()));
             }
         }
@@ -117,8 +122,8 @@ class VideoController extends Controller
         foreach ($request->file as $file) {
            array_push($files, $file);
         }
-        $tags = serialize($request->tags);
-        $files = serialize($request->file);
+        $tags = serialize($tags);
+        $files = serialize($files);
 
         $video = Video::find($id);
         
@@ -141,7 +146,8 @@ class VideoController extends Controller
             Storage::put($destinationPath, file_get_contents($file->getRealPath()));
         }
 
-        $video->save(); 
+        $video->save();
+        flash('Updated Successfully', 'success');
         return redirect()->back();
     }
 

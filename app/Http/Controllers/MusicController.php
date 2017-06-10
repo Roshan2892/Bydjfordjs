@@ -5,7 +5,7 @@ use App\Album;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\UploadRequest;
 
 class MusicController extends Controller
 {
@@ -46,18 +46,10 @@ class MusicController extends Controller
     }
 
      /* Store Music Into Database */
-    public function store(Request $request){
+    public function store(UploadRequest $request){
 
         $destinationFile = $orginalFiles =  [];
         $count = 0;
-        $this->validate($request,[
-            'title' => 'required|max:100',
-            'description' => 'required',
-            'poster' => 'required|image|mimes:jpeg,jpg,bmp,png',
-            'tags' => 'nullable|max:255',
-            'language' => 'required|max:255',
-            'artist' => 'required|max:60'
-        ]);    
 
         $poster_file = $request->file('poster');
         $poster_extension = $poster_file->getClientOriginalExtension();
@@ -66,46 +58,20 @@ class MusicController extends Controller
         $poster_fileName = $poster_unique_name . '.' . $poster_extension; // renaming image file
         $poster_destinationPath = config('app.fileDestinationPath') . '/images/' . $poster_fileName;
 
-
         $files = $request->file('file');
+
         foreach($files as $file){
+
             $extension = $file->getClientOriginalExtension();
             $fileName= $file->getClientOriginalName();
-            $maxFileSize = config('app.maxFileSize');
-            $validator = Validator::make(
-                array(
-                    'file'              =>      $file,
-                    'extension'         =>      $extension,
-                ),
-                [
-                    'file'              =>      'required|max:'.$maxFileSize,
-                    'extension'         =>      'required|in:mp3,mp4',
-                ],[
-                    'file.required' => 'File is Required',
-                    'extension.mimes' => 'File Should be of type mp3,mp4'
-                ]
-            );
-            if($validator->fails()){
-                $errors = $validator->errors();
-                return redirect()->back()->withInput()->withErrors($errors);
-            }else {
-                /*
-                    original File that will be used for display purpose
-                */
-                $orignalFileName = $fileName; 
-        
-                /* 
-                    Unique name generated to be stored on disk 
-                */
-                $unique_name = md5($fileName . time()); // renaming file name
-                $fileChangedName = $unique_name . '.' . $extension; 
 
-                /* 
-                    Store on disk 
-                */
-                $destinationPath = config('app.fileDestinationPath') . '/files/' .  $fileChangedName;
-                $uploaded = Storage::put($destinationPath, file_get_contents($file->getRealPath()));
-            }
+            $orignalFileName = $fileName;
+
+            $unique_name = md5($fileName . time()); // renaming file name
+            $fileChangedName = $unique_name . '.' . $extension;
+
+            $destinationPath = config('app.fileDestinationPath') . '/files/' .  $fileChangedName;
+            $uploaded = Storage::put($destinationPath, file_get_contents($file->getRealPath()));
 
             array_push($destinationFile,$fileChangedName); // created array for storing unique file names 
             array_push($orginalFiles, $orignalFileName); // created array for stroing original file names
@@ -119,20 +85,27 @@ class MusicController extends Controller
             $files = serialize($destinationFile);
             $filesNames = serialize($orginalFiles);
             $tags = serialize($request->tags);
-            Album::create([
-                'title' => $request->title,
-                'description' => $request->description,
-                'poster' => $poster_fileName,
-                'file' => $files,
-                'filename' => $filesNames,
-                'filecount' => $count,
-                'artist' => $request->artist,
-                'tags' => $tags,
-                'language' => $request->language
-            ]);
+
+            $album = new Album;
+            $album->title = $request->title;
+            $album->description = $request->description;
+            $album->poster = $poster_fileName;
+            $album->file = $files;
+            $album->filename = $filesNames;
+            $album->filecount = $count;
+            $album->artist = $request->artist;
+            $album->tags = $tags;
+            $album->language = $request->language;
+            $album->save();
+
+            if($count > 1)
+                $album->seo_title = "album_page_".$album->id;
+            else
+                $album->seo_title = "singles_page_".$album->id;
+            $album->save();
+            
             flash('Music Added Successfully', 'success');
             return redirect()->back();
-
         }
     }
 
@@ -151,8 +124,71 @@ class MusicController extends Controller
     }
 
     /* Display Edit Page */
-    public function update(Request $request, $id){
-        dd($request->all());
+    public function update(UploadRequest $request, $id){
+        $tags =  [];
+        $count = 0;
+        $album = Album::find($id);
+        //dd($album->file);
+        $album->title = $request->title;
+        $album->description = $request->description;
+        $album->artist = $request->artist;
+        $album->language = $request->language;
+
+        if($request->tags) {
+            foreach ($request->tags as $tag) {
+                array_push($tags, $tag);
+            }
+            $tags = serialize($tags);
+            $album->tags = $tags;
+        }
+
+        if($request->file('poster')) {
+            $posterData = $album->poster;
+            $poster_file = $request->file('poster');
+            $poster_extension = $poster_file->getClientOriginalExtension();
+            $poster_fileName = $poster_file->getClientOriginalName();
+            $poster_unique_name = md5($poster_fileName . time());
+            $poster_fileName = $poster_unique_name . '.' . $poster_extension; // renaming image file
+            $poster_destinationPath = config('app.fileDestinationPath') . '/images/' . $poster_fileName;
+            Storage::put($poster_destinationPath, file_get_contents($poster_file->getRealPath()));
+            Storage::delete('uploads/images/'.$posterData);
+            $album->poster = $poster_fileName;
+        }
+
+        if($request->file('file')){
+            $musicFiles = $album->file;
+            $musicFiles = unserialize($musicFiles);
+
+            $musicFilesName = $album->filename;
+            $musicFilesName = unserialize($musicFilesName);
+            $filecount = $album->filecount;
+
+            $files = $request->file('file');
+            foreach($files as $file){
+
+                $extension = $file->getClientOriginalExtension();
+                $fileName= $file->getClientOriginalName();
+
+                $orignalFileName = $fileName;
+
+                $unique_name = md5($fileName . time()); // renaming file name
+                $fileChangedName = $unique_name . '.' . $extension;
+                $destinationPath = config('app.fileDestinationPath') . '/files/' .  $fileChangedName;
+                $uploaded = Storage::put($destinationPath, file_get_contents($file->getRealPath()));
+                array_push($musicFiles,$fileChangedName); // created array for storing unique file names
+                array_push($musicFilesName, $orignalFileName); // created array for stroing original file names
+                $count++;
+            }
+            $musicFiles = serialize($musicFiles);
+            $musicFilesName = serialize($musicFilesName);
+            $filecount += $count;
+            $album->filecount = $filecount;
+            $album->file = $musicFiles;
+            $album->filename = $musicFilesName;
+        }
+        $album->save();
+        flash('Album Updated Successfully', 'success');
+        return redirect()->back();
     }
 
     /* Delete Music File */
@@ -196,6 +232,7 @@ class MusicController extends Controller
 
         $music->file = serialize($fileArr);
         $music->filename = serialize($fileNameArr);
+        $music->filecount = $music->filecount - 1;
         $music->save();
 
         Storage::delete('uploads/files/'.$fileIndex);

@@ -81,7 +81,7 @@
                         <div id="input_tag"></div>
                     @else
                         <div class="box">
-                            {!! Form::text('tags[]',  null, ['placeholder' => 'Enter tags... ','class'=>'form-control']) !!}
+                            <input type="text" placeholder="Enter tags... " class="form-control" name="tags[]">
                             <i class="fa fa-minus-square fa-2x" id="remove_tag"></i>
                         </div>
                         <div id="input_tag"></div>

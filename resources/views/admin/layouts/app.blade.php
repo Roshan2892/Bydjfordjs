@@ -52,8 +52,7 @@
                             <li><a href="{{ route('admin.video.show') }}">Videos</a></li>
                             <li><a href="{{ route('admin.podcast.show') }}">Podcast</a></li>
                             <li><a href="{{ route('admin.news.show') }}">News</a></li>
-                            <li><a href="">Mail</a></li>
-                            
+                            <li><a href="{{ route('admin.email.show_form') }}">Mail</a></li>  
                         @endif
                     </ul>
 

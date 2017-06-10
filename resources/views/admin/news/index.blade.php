@@ -20,7 +20,9 @@
                 </td>
 				<td><a href="{{ route('news.edit', ['id' => $new->id ]) }}">Edit</a></td>
 				<td>
-				<a href="{{ route('news.destroy', ['id' => $new->id ]) }}" data-method="delete"  data-confirm="Are you sure you want to delete this?">Delete</a></td>
+					{{ Form::open(array('route' => array('news.destroy', $new->id ), 'method' => 'delete')) }}
+						<button type="submit" >Delete</button>
+					{{ Form::close() }}</td>
 			</tr>
 		@endforeach
 		</table>

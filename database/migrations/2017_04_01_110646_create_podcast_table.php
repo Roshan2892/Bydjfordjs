@@ -15,6 +15,7 @@ class CreatePodcastTable extends Migration
     {
         Schema::create('podcasts', function(Blueprint $table){
             $table->increments('id');
+            $table->string('seo_title', 50)->nullable();            
             $table->string('title', 100);
             $table->longText('description',500);
             $table->string('poster',500);

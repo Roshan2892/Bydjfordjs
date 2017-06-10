@@ -82,8 +82,8 @@ Route::group(['prefix'=>'admin'], function (){
         ]
     ]);
 
-    Route::get('/send_emails', [ 'as' => 'admin.email.show_form', 'uses' => 'MailController@showMailForm' ]);
-    Route::post('/send_emails', [ 'as' => 'admin.email.send', 'uses' => 'MailController@sendBulkMails' ]);
+    Route::get('/mail', [ 'as' => 'admin.email.show_form', 'uses' => 'MailController@showMailForm' ]);
+    Route::post('/mail', [ 'as' => 'admin.email.send', 'uses' => 'MailController@sendBulkMails' ]);
     /*Route::get('/admin/media', 'FileController@show');
     Route::get('/admin/albums/delete/{id}', ['as' =>'delete', 'uses' => 'FileController@destroy']);*/
 });

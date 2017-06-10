@@ -120,19 +120,22 @@ class PodcastController extends Controller
             $files = serialize($destinationFile);
             $filesNames = serialize($orginalFiles);
             $tags = serialize($request->tags);
-            Podcast::create([
-                'title' => $request->title,
-                'description' => $request->description,
-                'poster' => $poster_fileName,
-                'file' => $files,
-                'filename' => $filesNames,
-                'artist' => $request->artist,
-                'tags' => $tags,
-                'language' => $request->language
-            ]);
+
+            $podcast = new Podcast;
+            $podcast->title = $request->title;
+            $podcast->description = $request->description;
+            $podcast->poster = $poster_fileName;
+            $podcast->file = $files;
+            $podcast->filename = $filesNames;
+            $podcast->artist = $request->artist;
+            $podcast->tags = $tags;
+            $podcast->language = $request->language;
+            $podcast->save();
+            $podcast->seo_title = "podcast_page_".$podcast->id;
+            $podcast->save();
+            
             flash('Podcast Added Successfully', 'success');
             return redirect()->back();
-
         }
     }
 
@@ -155,68 +158,63 @@ class PodcastController extends Controller
     /* Update Podcast */
     public function update(Request $request, $id)
     {
-        dd($request->all());
-        $destinationFile = $orginalFiles =  [];
+        $tags = [];
         $podcast = Podcast::find($id);
-
-        $this->validate($request, [
-            'title' => 'required|max:100',
-            'description' => 'required',
-            'poster' => 'image|mimes:jpeg,jpg,bmp,png',
-            'tags' => 'required|max:255',
-            'file' => 'image|mimes:jpeg,jpg,bmp,png',
-            'language' => 'required|max:255',
-            'artist' => 'required|max:60'
-        ]);
-
-        foreach ($request->tags as $tag) {
-           array_push($tags, $tag);
-        }
-        foreach ($request->file as $file) {
-           array_push($files, $file);
-        }
-        $tags = serialize($request->tags);
-        $files = serialize($request->file);
-
         $podcast->title = $request->title;
         $podcast->description = $request->description;
         $podcast->artist = $request->artist;
         $podcast->language = $request->language;
-        $podcast->tags = $tags;
-        $podcast->file = $files;
-        
 
-        if($request->hasFile('poster')){
-            $file = $request->file('poster');
-            $extension = $file->getClientOriginalExtension();
-            $fileName = $file->getClientOriginalName();
-            $unique_name = md5($fileName . time());
-            $fileName = $unique_name . '.' . $extension; // renaming image
-            $destinationPath = config('app.fileDestinationPath') . '/images/' . $fileName;
-            Storage::delete('uploads/images/'. $podcast->poster); //delete the file
-            $podcast->poster = $fileName;
-            Storage::put($destinationPath, file_get_contents($file->getRealPath()));
+        if($request->tags) {
+            foreach ($request->tags as $tag) {
+                array_push($tags, $tag);
+            }
+            $tags = serialize($tags);
+            $podcast->tags = $tags;
         }
 
-        if($request->hasFile('file')){
+        if($request->file('poster')) {
+            $posterData = $podcast->poster;
+            $poster_file = $request->file('poster');
+            $poster_extension = $poster_file->getClientOriginalExtension();
+            $poster_fileName = $poster_file->getClientOriginalName();
+            $poster_unique_name = md5($poster_fileName . time());
+            $poster_fileName = $poster_unique_name . '.' . $poster_extension; // renaming image file
+            $poster_destinationPath = config('app.fileDestinationPath') . '/images/' . $poster_fileName;
+            Storage::put($poster_destinationPath, file_get_contents($poster_file->getRealPath()));
+            Storage::delete('uploads/images/'.$posterData);
+            $podcast->poster = $poster_fileName;
+        }
 
-            $files = $request->file('file'); 
+        if($request->file('file')){
+            $podcastFiles = $podcast->file;
+            $podcastFiles = unserialize($podcastFiles);
+
+            $podcastFilesName = $podcast->filename;
+            $podcastFilesName = unserialize($podcastFilesName);
+
+            $files = $request->file('file');
             foreach($files as $file){
+
                 $extension = $file->getClientOriginalExtension();
                 $fileName= $file->getClientOriginalName();
-                $maxFileSize = config('app.maxFileSize');
-                    $orignalFileName = $fileName . '.'. $extension; 
-                    $unique_name = md5($fileName . time()); // renaming file name
-                    $fileChangedName = $unique_name . '.' . $extension; 
-                    $destinationPath = config('app.fileDestinationPath'). '/files/' .$fileChangedName;
-                    Storage::put($destinationPath, file_get_contents($file->getRealPath()));
 
-                array_push($destinationFile,$fileChangedName); // created array for storing unique file names 
-                array_push($orginalFiles, $orignalFileName); // created array for stroing original file names
+                $orignalFileName = $fileName;
+
+                $unique_name = md5($fileName . time()); // renaming file name
+                $fileChangedName = $unique_name . '.' . $extension;
+                $destinationPath = config('app.fileDestinationPath') . '/files/' .  $fileChangedName;
+                $uploaded = Storage::put($destinationPath, file_get_contents($file->getRealPath()));
+                array_push($podcastFiles,$fileChangedName); // created array for storing unique file names
+                array_push($podcastFilesName, $orignalFileName); // created array for stroing original file names
             }
+            $podcastFiles = serialize($podcastFiles);
+            $podcastFilesName = serialize($podcastFilesName);
+            $podcast->file = $podcastFiles;
+            $podcast->filename = $podcastFilesName;
         }
-
-        $podcast->save(); 
+        $podcast->save();
+        flash('Podcast Updated Successfully', 'success');
         return redirect()->back();
     }
 

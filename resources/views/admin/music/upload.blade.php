@@ -38,7 +38,6 @@
                 <div class="form-group">
                     {!! Form::label('description','Description: ') !!}
                     {!! Form::textarea('description', @$music->description, ['size' => '30x5','placeholder' => 'Description...','class'=>'form-control']) !!}
-
                 </div>
 
                 <div class="form-group">
@@ -54,7 +53,7 @@
                     {!! Form::file('file[]',['class'=>'form-control','multiple'=>'true']) !!}
                     @if(isset($music))
                         @foreach(unserialize($music->filename) as $file)
-                            {!! Form::label('files', $f) !!} 
+                            {!! Form::label('files', $file) !!}
                             <a href="{{ route('admin.music.delete', ['id'=> $music->id, 'file' => $file ] ) }}"><i class="fa fa-times"></i></a> <br>
                         @endforeach
                     @endif
@@ -72,14 +71,14 @@
                         @foreach($tags as $tag)
                             <div class="box">
                                 {{ Form::text('tags[]',  $tag, ['placeholder' => 'Enter comma seprated tags...','class'=>'form-control']) }}
-
+                                <i class="fa fa-multiply fa-2x"></i>
                                 <i class="fa fa-minus-square fa-2x" id="remove_tag"></i>
                             </div>
                         @endforeach
                         <div id="input_tag"></div>
                     @else
                         <div class="box">
-                            {!! Form::text('tags[]',  null, ['placeholder' => 'Enter tags... ','class'=>'form-control']) !!}
+                            <input type="text" placeholder="Enter tags... " class="form-control" name="tags[]">
                             <i class="fa fa-minus-square fa-2x" id="remove_tag"></i>
                         </div>
                         <div id="input_tag"></div>

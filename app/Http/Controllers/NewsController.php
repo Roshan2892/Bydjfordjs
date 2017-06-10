@@ -57,13 +57,18 @@ class NewsController extends Controller
 
             $data = serialize($request->file);
             $tags = serialize($request->tags);
-            if(News::create([
-                    'title' => $request->title,
-                    'description' => $request->description,
-                    'poster' => $fileName,
-                    'file' => $data,
-                    'tags' => $tags
-                ])){
+
+            $news = new News;
+            $news->title = $request->title;
+            $news->description = $request->description;
+            $news->poster = $fileName;
+            $news->file = $data;
+            $news->tags = $tags;
+            $news->save();
+            $news->seo_title = "news_page_".$news->id;
+            $news->save();
+            
+            if($news){
                 Storage::put($destinationPath, file_get_contents($file->getRealPath()));
             }
             flash('News Added Successfully', 'success');
@@ -134,17 +139,18 @@ class NewsController extends Controller
             Storage::put($destinationPath, file_get_contents($file->getRealPath()));
         }
 
-        $news->save(); 
+        $news->save();
+        flash('News Updated Successfully', 'success');
         return redirect()->back();
     }
 
     /* Delete News Page */
     public function destroy($id){
         $data= News::findOrFail($id);
-        $poster= $data->poster;
-        Storage::delete($poster);
-        //$data->delete();
-        //flash('Deleted Successfully', 'success');
-       // return redirect()->back();
+        $poster = $data->poster;
+        Storage::delete('uploads/images/'. $poster);
+        $data->delete();
+        flash('Deleted Successfully', 'success');
+        return redirect()->back();
     }
 }

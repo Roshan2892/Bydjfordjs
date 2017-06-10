@@ -3,7 +3,7 @@
 return [
     'fileDestinationPath'=>'uploads',
     'allowedFileTypes'=>'audio/mpeg,audio/wav',
-    'maxFileSize'=> 2000*10,
+    'maxFileSize'=> 5000*10,
     /*
     |--------------------------------------------------------------------------
     | Application Name
