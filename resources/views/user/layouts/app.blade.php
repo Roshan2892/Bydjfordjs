@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{{ URL::to('/css/user_styles.css') }}">
     <link rel="stylesheet" href="{{ URL::to('/css/bar-ui.css') }}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css"/>
     </head>
 <body>
 
@@ -50,6 +51,8 @@
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
 <script type="text/javascript" src="{{ URL::to('/js/soundmanager2.js') }}"></script>
-    <script src="{{ URL::to('/js/bar-ui.js') }}"></script>
+<script src="{{ URL::to('/js/bar-ui.js') }}"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
+<script src="{{ URL::to('/js/slick.js') }}"></script>
 </body>
 </html>

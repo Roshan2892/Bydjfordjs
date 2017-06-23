@@ -12,7 +12,6 @@
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "^5.4",
-        "mailgun/mailgun-php": "^2.3",
         "php-http/curl-client": "^1.7",
         "unisharp/laravel-filemanager": "^1.7"
     },
@@ -54,5 +53,11 @@
         "preferred-install": "dist",
         "sort-packages": true,
         "optimize-autoloader": true
+    },
+    "repositories": {
+        "packagist": {
+            "type": "composer",
+            "url": "https://packagist.org"
+        }
     }
 }

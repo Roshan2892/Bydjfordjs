@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="{{ URL::to('/css/bootstrap.min.css') }}">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.15/datatables.min.css"/>
 </head>
 <body>
     <div id="app">
@@ -49,7 +50,7 @@
                         @if (Auth::guest())
                         @else
                             <li><a href="{{ route('admin.music.show') }}">Music</a></li>
-                            <li><a href="{{ route('admin.video.show') }}">Videos</a></li>
+                            <li><a href="{{ route('admin.video.show') }}">Video</a></li>
                             <li><a href="{{ route('admin.podcast.show') }}">Podcast</a></li>
                             <li><a href="{{ route('admin.news.show') }}">News</a></li>
                             <li><a href="{{ route('admin.email.show_form') }}">Mail</a></li>  
@@ -118,5 +119,6 @@
         };
         tinymce.init(editor_config);
     </script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.15/datatables.min.js"></script>
 </body>
 </html>

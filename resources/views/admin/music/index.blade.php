@@ -2,50 +2,60 @@
 
 @section('content')
 	<div class="container">
-		<div class="links">
-			<ul>
-				<li><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-				<li><a href="{{ route('music.create') }}">Add Music</a></li>
-			</ul>
-		</div>
 		<div class="music_files">
+            <h3>Music <a href="{{ route('music.create') }}" style="float: right;">
+                    <button class="btn btn-primary"><i class="fa fa-plus-square" aria-hidden="true"> Add</i></button>
+                </a>
+            </h3>
+
+            @if (session()->has('flash_notification.message'))
+                <div class="alert alert-{{ session('flash_notification.level') }}">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    {!! session('flash_notification.message') !!}
+                </div>
+            @endif
+
 			<div class="row">
 				<div class="col-lg-12 col-md-12 col-sm-12" style="background: #eae7e7;padding:25px;">
 					@if(count($music) > 0)
-						<table border="1">
-							<tr>
-								<td>ID</td>
-								<td>Title</td>
-								<td>Description</td>
-								<td>Poster</td>
-								<td>Tags</td>
-								<td>Artist</td>
-								<td>Language</td>
-								<td colspan="2">Action</td>
-							</tr>
+						<table id="music_table" width="100%" class="display cell-border">
+							<thead>
+								<tr>
+									<th>Title</th>
+									<th>Poster</th>
+									<th>Artist</th>
+									<th>Tags</th>
+									<th>Language</th>
+									<th>Action</th>
+
+								</tr>
+							</thead>
+							<tbody>
 							@foreach($music as $new)
 								<tr>
-									<td>{{ $new->id }}</td>
 									<td>{{ $new->title }}</td>
-									<td>{!! $new->description !!}</td>
 									<td>
-										<img src="{!!\Illuminate\Support\Facades\Storage::url('uploads/images/'.$new->poster) !!}" alt="Music by {{ $new->artist }}" width="100" height="100">
+										<img src="{!!\Illuminate\Support\Facades\Storage::url('uploads/images/'.$new->poster) !!}" alt="Music by {{ $new->artist }}" width="120" height="100">
 									</td>
+					                <td>{!! $new->artist !!}</td>
 									<td>
 										@foreach(unserialize($new->tags) as $tag)
-					                        {{ $tag }}
-					                    @endforeach
-					                </td>
-					                <td>{!! $new->artist !!}</td>
+											{{ $tag }},
+										@endforeach
+									</td>
 					                <td>{!! $new->language !!}</td>
 									<td>
-										<a href="{{ route('music.edit', ['id' => $new->id ]) }}">Edit</a>
+										{{ Form::open(array('route' => array('music.edit', $new->id ), 'method' => 'get')) }}
+											<button class="btn btn-success"><i class="fa fa-pencil" aria-hidden="true"> Edit</i></button>
+										{{ Form::close() }}
+									    &nbsp;&nbsp;&nbsp;&nbsp;
 										{{ Form::open(array('route' => array('music.destroy', $new->id ), 'method' => 'delete')) }}
-					    					<button type="submit" >Delete</button>
+												<button class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"> Delete</i></button>
 										{{ Form::close() }}
 									</td>
 								</tr>
 							@endforeach
+							</tbody>
 						</table>
 					@else
 						<h3>No Albums Found !!</h3>
@@ -54,4 +64,14 @@
 			</div>
 		</div>
 	</div>
+
+	<script>
+		$(function () {
+			$("#music_table").DataTable({
+//                "scrollY": 200,
+                "scrollX": true,
+                "order": [[ 0, "desc" ],[ 2, "desc" ],[ 3, "desc" ],[ 4, "desc" ]]
+			});
+        });
+	</script>
 @endsection

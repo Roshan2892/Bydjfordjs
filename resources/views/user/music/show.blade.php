@@ -90,31 +90,31 @@
 
                         <div class="sm2-playlist-wrapper">
                             <ul class="sm2-playlist-bd">
-                               @foreach(unserialize($details->file) as $file)
-                                    {{--@foreach(unserialize($details->filename) as $filename)--}}
-                                        <li>
-                                            <a href="{{ \Illuminate\Support\Facades\Storage::url('uploads/files/'.$file) }} ">
-                                                <b>{!!  $file !!}</b>
-                                            </a>
-                                        </li>
-                                    {{--@endforeach--}}
-                                @endforeach
+                               @for($i = 0; $i < count($files); $i++)
+                                    <li>
+                                        <a href="{{ \Illuminate\Support\Facades\Storage::url('uploads/files/'.$files[$i]) }} ">
+                                            <b>{!!  $fileNames[$i] !!}</b>
+                                        </a>
+                                        {{ Form::open(array('route' => array('music.download', $files[$i] ), 'method' => 'get')) }}
+                                            <button class="btn"><i class="fa fa-download" aria-hidden="true"></i></button>
+                                        {{ Form::close() }}
+                                    </li>
+                                @endfor
                             </ul>
                         </div>
 
                         <div class="sm2-extra-controls">
                             <div class="bd">
-                                <div class="sm2-inline-element sm2-button-element">
+                                {{--<div class="sm2-inline-element sm2-button-element">--}}
                                     <a href="#prev" title="Previous" class="sm2-inline-button previous">&lt; previous</a>
-                                </div>
-                                <div class="sm2-inline-element sm2-button-element">
+                                {{--</div>--}}
+                                {{--<div class="sm2-inline-element sm2-button-element">--}}
                                     <a href="#next" title="Next" class="sm2-inline-button next">&gt; next</a>
-                                </div>
+                                {{--</div>--}}
                             </div>
                         </div>
                     </div>
                 </div>
-                <a href="{{ route('music.download',[ 'id'=> $details->id ]) }}" class="btn btn-default">Download</a>
             @endforeach
         @endif
     </div>  

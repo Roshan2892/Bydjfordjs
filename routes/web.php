@@ -33,7 +33,7 @@ Route::get('/video', ['as' => 'video.index', 'uses'=>'VideoController@index']);
 Route::get('/music/singles', ['as' => 'singles.index', 'uses'=>'MusicController@showSingles']);
 Route::get('/music/albums', ['as' => 'albums.index', 'uses'=>'MusicController@showAlbum']);
 Route::get('/music/{title}', ['as' => 'music.show', 'uses'=>'MusicController@show']);
-Route::get('/music/download/{id}',[ 'as' => 'music.download', 'uses'=>'MusicController@download' ]);
+Route::get('/music/download/{file}',[ 'as' => 'music.download', 'uses'=>'MusicController@download' ]);
 
 /********** Podcast **************/
 Route::get('/podcast/{title}', ['as' => 'podcast.show', 'uses'=>'PodcastController@show']);

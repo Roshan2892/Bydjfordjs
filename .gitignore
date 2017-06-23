@@ -1,6 +1,11 @@
 /node_modules
-/public/storage
-/storage/*.key
-/vendor
-/.idea
+/
+public/storage
+/
+storage/*
+.key
+/
+vendor
+/
+.idea
 .env

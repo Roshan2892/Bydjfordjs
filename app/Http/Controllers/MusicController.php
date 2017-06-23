@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Album;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -10,7 +11,7 @@ use App\Http\Requests\UploadRequest;
 class MusicController extends Controller
 {
     public function __construct(){
-        $this->middleware('auth:admin')->except('index', 'show');
+        $this->middleware('auth:admin')->except('index', 'show','download');
     }
 
     /******************************** User Side *****************************/
@@ -30,16 +31,18 @@ class MusicController extends Controller
     /* Display Single Music Page*/
     public function show($title){
         $music = Album::get()->where('seo_title',$title);
-        return view('user.music.show',compact('music'));
+        foreach($music as $m) {
+            $files = unserialize($m->file);
+            $fileNames = unserialize($m->filename);
+        }
+        return view('user.music.show',compact('music','files','fileNames'));
     }
 
     /* Download Music File */
     public function download($downloadFile){
-        $music = Album::where('id',$downloadFile)->select('file')->first();
-        foreach(unserialize($music->file) as $file){
-            return \Response::download(storage_path('app/public/').'uploads/files/'.$file);
-        }
+        return \Response::download(storage_path('app/public/').'uploads/files/' . $downloadFile);
     }
+
 
 
 
