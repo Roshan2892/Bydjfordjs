@@ -50,6 +50,7 @@
 <!--[if lt IE 9]>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
+<script src="https://use.fontawesome.com/3053be66a0.js"></script>
 <script type="text/javascript" src="{{ URL::to('/js/soundmanager2.js') }}"></script>
 <script src="{{ URL::to('/js/bar-ui.js') }}"></script>
 <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
