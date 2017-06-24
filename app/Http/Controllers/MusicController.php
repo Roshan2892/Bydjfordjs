@@ -11,7 +11,7 @@ use App\Http\Requests\UploadRequest;
 class MusicController extends Controller
 {
     public function __construct(){
-        $this->middleware('auth:admin')->except('index', 'show','download');
+        $this->middleware('auth:admin')->except('index', 'show','download','showAlbum','showSingles');
     }
 
     /******************************** User Side *****************************/

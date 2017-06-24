@@ -4,46 +4,30 @@
     
     <!-- start container -->
     <div class="container">
-        <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12">
-                <h1>My Story</h1>
-            </div>
-        </div>
-        <!-- start row -->
-        <div class="row">
+        <h1>About Us</h1>
+        <div class="about_container">	
+            <h2><span>MISSION</span></h2>
+            <span>
+                To promote and unite Indian and International Deejays/Remixers/Producers across the globe.
+				Get recognized with your Talent.
+            </span>
             
-            <!-- start col-lg-12 -->
-            <div class="col-lg-7 col-md-7 col-sm-7">
-                <h2><span>Tom Brandon</span></h2>
-                <div class="about_container">
-                    <span>
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
-                        scrambled it to make a type specimen book. <br>
-                        It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
-                        It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-                        and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. <br><br>
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                        when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                        It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
-                        It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-                        and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                    </span>
-                </div>
-            </div>
-            <!-- end col-lg-8 -->
+            <h2><span>WHO WE ARE?</span></h2>
+            <span>
+                India's Online Edm/House/Bollywood/Trap/Hip-Hop/Commercial remixes Music Promoters For Underground & Renowned Deejays. <br>
 
-            <!-- start col-lg-4 -->
-            <div class="col-lg-5 col-md-5 col-sm-5" >
-                <div class="about_img_container">
-                    <img src="{{ URL::to('image/assets/brandon.jpg') }}" alt="DJ Brandon">
-                </div>
-            </div>
-            <!-- end col-lg-4 -->
+				BDFD (ByDjforDjs) is an official group created especially for the Bedroom/Djs/producers/remixers who got the Talent and need a place to share their Production skills with other Djs and producers across the Globe. We help you get more listeners and Friends from around the world.. <br>
+
+				This is the Right Place to promote all genres of Music and Bollywood remixes. <br>
+
+				Together with our community members we would  like to provide the best music experience to you. We also want to give every DJ and producer opportunity to promote their work, connect with the audience. <br>
+
+				We believe ByDjforDjs  took an extra step towards solving the problems of the new generation of internet users looking for a simple and yet powerful way to share mix and remix on the Internet. So we created a website platform that not only allows our internet friends to obtain new, free, exclusive mix & remix but to do that in a socially-charged atmosphere.<br>
+				
+				We are still able to give fresh, new artists and DJs/Producers a chance to submit and expose their music to millions of viewers and listeners across the globe. In the long and short term, our goal is to change the way club music lovers pursue their hobby.<br>
+				If you have a query drop an email at bydjfordjsteam@gmail.com and we will get in touch shortly.
+            </span>
         </div>
-        <!-- end row -->
-
     </div>
     <!-- end container -->
 @endsection
