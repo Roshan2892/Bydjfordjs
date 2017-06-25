@@ -47,7 +47,7 @@ Route::get('/news', ['as' => 'news.index', 'uses'=>'NewsController@index']);
 /********** Mails *****************/
 Route::post('/subscribe', ['as' => 'subscribe', 'uses' => 'MailController@subscribe']);
 Route::get('/subscribe/{hash}', [ 'uses'=>'MailController@confirmSubscriptions', 'as'=>'confirm.subscription' ]);
-
+Route::get('/unsubscribe/{hash}',['uses'=>'MailController@unsubscribe', 'as'=>'unsubscribe']);
 /********** Admin *****************/
 Route::group(['prefix'=>'admin'], function (){
 	Route::get('/', 'AdminController@index')->name('admin.dashboard');

@@ -2,15 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Subscription;
 use Illuminate\Http\Request;
-use Mailgun\Mailgun;
-use Illuminate\Support\Facades\Input;
+use App\Mail\SubscribeToNewsletters;
+use App\Mail\ConfirmSubscription;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class MailController extends Controller
 {
 
     public function __construct(){
-        $this->middleware('auth:admin')->except('subscribe', 'confirmSubscriptions');
+        $this->middleware('auth:admin')->except('subscribe', 'confirmSubscriptions','unsubscribe');
     } 
     /**
      * Show the application dashboard.
@@ -19,10 +23,6 @@ class MailController extends Controller
      */
     public function subscribe(Request $request)
     {
-        $mailgun = new Mailgun(env('MAILGUN_KEY'));
-        $mailgunValidate = new Mailgun(env('MAILGUN_PUBKEY'));
-        $mailgunOptIn = $mailgun->OptInHandler();
-        
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required|email'
@@ -30,56 +30,43 @@ class MailController extends Controller
         $name = $request->name;
         $email = $request->email;
 
-        $validate = $mailgunValidate->get('address/validate', [
-            'address' => $email
-        ])->http_response_body;
-
-        if($validate->is_valid){
-            $hash = $mailgunOptIn->generateHash(env('MAILGUN_LIST'), env('MAILGUN_SECRET'), $email);
-            $mailgun->sendMessage(env('MAILGUN_DOMAIN'), [
-                'from' => 'noreply@bydjfordjs.com',
-                'to' => $email,
-                'subject' => 'Please confirm your subscription',
-                'html' => "Hello {$name}, You have signed up to our mailing list. Please confirm below. <br><br> http://127.0.0.1:8000/subscribe/{$hash}"
-            ]);
-
-            $mailgun->post('lists/' . env('MAILGUN_LIST') . '/members', [
-                'name' => $name,
-                'address' => $email,
-                'subscribed' => 'no'
-            ]);
+        $subscription_table = DB::table('subscriptions')
+            ->get()
+            ->where('email','=', $email);
+        if(count($subscription_table) >= 1){
+            flash('You are already subscribed', 'danger');
+            return redirect()->back();
         }
-
-        return redirect()->back();
+        else{
+            $subscription = new Subscription;
+            $subscription->name = $name;
+            $subscription->email = $email;
+            $randomString =str_random(30);
+            $subscription->random_string = $randomString;
+            $subscription->subscribed = 0;
+            $subscription->save();
+            Mail::to($email)->send(new SubscribeToNewsletters($name, $randomString));
+            flash('A mail has been sent to your inbox', 'success');
+            return redirect()->back();
+        }
     }
 
     public function confirmSubscriptions(Request $request)
     {
-        $mailgun = new Mailgun(env('MAILGUN_KEY'));
-        $mailgunValidate = new Mailgun(env('MAILGUN_PUBKEY'));
-        $mailgunOptIn = $mailgun->OptInHandler();
-
-        $url = $request->path();
-        $token = substr($url, strpos($url, '/') + 1);
-        $hash = $mailgunOptIn->validateHash(env('MAILGUN_SECRET'), $token);
-
-        if($hash){
-            $list = $hash['mailingList'];
-            $email = $hash['recipientAddress'];
-
-            $mailgun->put('lists/' . env('MAILGUN_LIST') . '/members/' . $email, [
-                'subscribed' => 'yes'
-            ]);
-
-            $mailgun->sendMessage(env('MAILGUN_DOMAIN'), [
-                'from' => 'noreply@bydjfordjsteam.com',
-                'to' => $email,
-                'subject' => 'You have just subscribed',
-                'html' => 'Thanks for confirming, you are now subscribed'
-            ]);
-
-            return redirect()->to('/');
+        $randomString = substr($request->path(),10);
+        $subscription = DB::table('subscriptions')->get()
+            ->where('random_string',$randomString);
+        if($subscription[0]->subscribed == 0){
+            $email = $subscription[0]->email;
+            $name = $subscription[0]->name;
+            $randomString = str_random(30);
+            DB::table('subscriptions')
+                ->where('id',$subscription[0]->id)
+                ->update(['subscribed' => 1]);
+            Mail::to($email)->send(new ConfirmSubscription($name, $randomString, $email));
+            flash('You are now subscribed', 'success');
         }
+        return redirect()->to('/');
     }
 
     public function showMailForm()
@@ -91,16 +78,18 @@ class MailController extends Controller
     {
         $subject = $request['subject'];
         $message = $request['description'];
-
-        $mailgun = new Mailgun(env('MAILGUN_KEY'));
-
-        $mailgun->sendMessage(env('MAILGUN_DOMAIN'), [
-            'from'      => 'noreply@bydjfordjs.in',
-            'to'        => env('MAILGUN_LIST'),
-            'subject'   => $subject,
-            'html'      => "{$message} <br><br><a href=\"%unsubcribe_url%\">Unsubcsribe</a>"
-        ]);
-
         return redirect()->back();
+    }
+
+    public function unsubscribe(Request $request)
+    {
+        $email = substr($request->path(),12);
+        $subscription = DB::table('subscriptions')->get()
+            ->where('email',$email);
+        if($subscription[0]->subscribed == 1){
+            DB::table('subscriptions')->where('email',$email)->delete();
+            flash('You are unsubscribed', 'danger');
+        }
+        return redirect()->to('/');
     }
 }
