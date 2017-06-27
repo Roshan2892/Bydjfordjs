@@ -10,8 +10,11 @@
     <title>{{ config('app.name') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ URL::to('/js/jquery.js') }}"></script>
-    <script src="{{ URL::to('/js/bootstrap.min.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
     <script>
         window.Laravel = {!! json_encode([
             'csrfToken' => csrf_token(),
@@ -47,8 +50,7 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        @if (Auth::guest())
-                        @else
+                        @if (Auth::user())
                             <li><a href="{{ route('admin.music.show') }}">Music</a></li>
                             <li><a href="{{ route('admin.video.show') }}">Video</a></li>
                             <li><a href="{{ route('admin.podcast.show') }}">Podcast</a></li>
@@ -60,9 +62,10 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
+
                         @if (Auth::guest())
                             <li><a href="{{ route('login') }}">Login</a></li>
-                        @else       
+                        @else
                             <li><a href="{{ route('logout') }}">Logout</a></li>
                         @endif
                     </ul>
@@ -75,12 +78,7 @@
 
     <!-- Scripts -->
 
-    <!-- <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> -->
-    <!--[if lt IE 9]>
-    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    
+
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="https://use.fontawesome.com/3053be66a0.js"></script>
     <script src="{{ URL::to('tinymce/tinymce.min.js') }}"></script>

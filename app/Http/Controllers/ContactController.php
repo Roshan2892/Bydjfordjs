@@ -19,16 +19,8 @@ class ContactController extends Controller
         $name = $contact['name'];
         $email = $contact['email'];
         $msg = $contact['message'];
-        //dd($message);
-        //['name' => $name, 'email' => $email, 'message'=> $message ]
-
-        // Mail::to('roshansuvarna2892@gmail.com')
-        // 	// ->from($email)
-        // 	// ->subject($message)
-        // 	->send(new MailOptions());
-        Mail::plain('user.mail', ['name' => $name, 'email' => $email, 'msg'=> $msg ], function ($message) use ($email,$name)
+        Mail::plain('email.contact', ['name' => $name, 'email' => $email, 'msg'=> $msg ], function ($message) use ($email,$name)
         {
-
             $message->from($email, $name);
             $message->subject("Message received from $name@bydjfordjs.in");
             $message->to('bydjfordjsteam@gmail.com');

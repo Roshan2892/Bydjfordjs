@@ -38,6 +38,14 @@
                     <li><a href="{{ route('podcast.index') }}">Podcast</a></li>
                     <li><a href="{{ route('news.index') }}">News</a></li>
                     <li><a href="{{ route('contact.index') }}">Contact</a></li>
+                    <li>
+                        <form class="navbar-form navbar-left">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Search">
+                            </div>
+                            <button type="submit" class="btn btn-default">Submit</button>
+                        </form>
+                    </li>
                 </ul>
             </div>
         </div>

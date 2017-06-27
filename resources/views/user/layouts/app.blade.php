@@ -40,7 +40,7 @@
 
     @yield('content')
 
-    @include('user.layouts.footer')
+    {{--@include('user.layouts.footer')--}}
 
 
 <script src="{{ URL::to('/js/jquery.js') }}"></script>

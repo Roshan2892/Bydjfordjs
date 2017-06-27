@@ -2,32 +2,35 @@
 
 @section('content')
 	<div class="container">
-		<div class="podcast_files">
-			<h3>Video <a href="{{ route('podcast.create') }}" style="float: right;">
-					<button class="btn btn-primary"><i class="fa fa-plus-square" aria-hidden="true"> Add</i></button>
-				</a>
-			</h3>
+		<div class="row">
+			<div class="col-lg-12 col-md-12 col-xs-12">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h1>
+							Video <a href="{{ route('podcast.create') }}" style="float: right;">
+								<h3><i class="fa fa-plus-square" aria-hidden="true"> Add</i></h3>
+							</a>
+						</h1>
+					</div>
 
-			@if (session()->has('flash_notification.message'))
-				<div class="alert alert-{{ session('flash_notification.level') }}">
-					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-					{!! session('flash_notification.message') !!}
-				</div>
-			@endif
-
-			<div class="row">
-				<div class="col-lg-12 col-md-12 col-sm-12" style="background: #eae7e7;padding:25px;">
-					@if(count($video) > 0)
-						<table id="video_table"  width="100%" class="display cell-border">
-							<thead>
+					<div class="panel-body">
+						@if (session()->has('flash_notification.message'))
+							<div class="alert alert-{{ session('flash_notification.level') }}">
+								<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+								{!! session('flash_notification.message') !!}
+							</div>
+						@endif
+						@if(count($video) > 0)
+							<table id="video_table"  width="100%" class="display cell-border">
+								<thead>
 								<th>Title</th>
 								<th>Poster</th>
 								<th>Artist</th>
 								<th>Tags</th>
 								<th>Language</th>
 								<th>Action</th>
-							</thead>
-							<tbody>
+								</thead>
+								<tbody>
 								@foreach($video as $new)
 									<tr>
 										<td>{{ $new->title }}</td>
@@ -52,11 +55,12 @@
 										</td>
 									</tr>
 								@endforeach
-							</tbody>
-						</table>
-					@else
-						<h3>No Videos Found</h3>
-					@endif
+								</tbody>
+							</table>
+						@else
+							<h3>No Videos Found !!</h3>
+						@endif
+					</div>
 				</div>
 			</div>
 		</div>
