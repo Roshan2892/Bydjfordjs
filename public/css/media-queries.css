@@ -1,0 +1,17 @@
+/* home page */
+@media screen and (max-width: 320px) {
+    hr{margin-top: 35px;}
+    .latest_media .view_more { margin: 0; }
+    .news img{ width: 228px;}
+}
+
+@media screen and (max-width:1024px) {
+    .sub-content { max-width: 100%;}
+}
+/* end home page */
+
+/* about page */
+@media screen and (max-width: 320px) {
+    hr { margin-top: 0px; }
+}
+/* end about page */

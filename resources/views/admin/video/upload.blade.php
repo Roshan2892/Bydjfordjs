@@ -2,16 +2,6 @@
 
 @section('content')
     <div class="container">
-        <a href="{{ route('admin.video.show') }}"><i class="fa fa-backward" aria-hidden="true"></i> Back</a>
-        <div class="row">
-            <div class="col-md-offset-1 col-md-10" style="background: #eae7e7;padding:25px;">
-                <h1>Video</h1>
-
-            </div>
-        </div>
-    </div>
-
-    <div class="container">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-xs-12">
                 <div class="panel panel-default">

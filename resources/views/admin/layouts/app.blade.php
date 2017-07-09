@@ -24,10 +24,11 @@
     <!-- Styles -->
     <link rel="stylesheet" href="{{ URL::to('/css/bootstrap.min.css') }}">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/media-queries.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.15/datatables.min.css"/>
 </head>
-<body>
+<body style="background: none;">
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">

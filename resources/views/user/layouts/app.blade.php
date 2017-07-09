@@ -9,10 +9,11 @@
     <meta name="author" content="">
     <!--  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
     <link rel="stylesheet" href="{{ URL::to('/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ URL::to('/css/user_styles.css') }}">
+    <link rel="stylesheet" href="{{ URL::to('/css/style.css') }}">
+    <link rel="stylesheet" href="{{ URL::to('/css/media-queries.css') }}">
     <link rel="stylesheet" href="{{ URL::to('/css/bar-ui.css') }}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="{{ URL::to('/css/slick.css') }}"/>
     </head>
 <body>
 
@@ -37,16 +38,14 @@
 
     @include('user.layouts.header')
 
-
-    @yield('content')
-
+    <div class="container">
+        @yield('content')
+    </div>
     {{--@include('user.layouts.footer')--}}
 
 
 <script src="{{ URL::to('/js/jquery.js') }}"></script>
 <script src="{{ URL::to('/js/bootstrap.min.js') }}"></script>
-<!-- <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> -->
 <!--[if lt IE 9]>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->

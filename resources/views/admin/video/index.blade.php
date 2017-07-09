@@ -7,7 +7,7 @@
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<h1>
-							Video <a href="{{ route('podcast.create') }}" style="float: right;">
+							Video <a href="{{ route('video.create') }}" style="float: right;">
 								<h3><i class="fa fa-plus-square" aria-hidden="true"> Add</i></h3>
 							</a>
 						</h1>
