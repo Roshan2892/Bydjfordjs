@@ -2,10 +2,10 @@
 
 @section('content')
     <!-- start row -->
-    <div class="row main-content">
+    <div class="row main_content">
 
         <!-- start col-md-8 -->
-        <div class="col-lg-8 col-sm-12 sub-content">
+        <div class="col-lg-8 col-sm-12 sub_content">
 
             <!-- start singles -->
             <div class="latest_singles latest_media">
@@ -95,7 +95,7 @@
         <!-- end col-md-8 -->
 
         <!-- start col-md-4 -->
-        <div class="col-lg-4 col-sm-12 news-content">
+        <div class="col-lg-4 col-sm-12 news_content">
 
             <!-- start news -->
             <div class="lastest_news latest_media">

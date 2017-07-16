@@ -1,49 +1,41 @@
 @extends('user.layouts.app')
 
 @section('content')
-    <div class="container">
-        <h1>Videos</h1>
-        @if(count($videos) > 0)
-           {{-- {{ $videos->links() }}--}}
-
-            @foreach($videos as $video)
-                <div class="row">
-                    <div class="col-md-2 col-sm-12" >
-                        <div class="image" style="background:white;">
+    <div class="media_container">
+        <h1>Latest Videos</h1><hr>
+    @if(count($videos) > 0)
+        @foreach($videos as $video)
+            <!-- start row -->
+                <div class="row media_content">
+                    <div class="col-lg-5 col-sm-5 col-xs-12">
+                        <div class="image">
                             <a href="{{ route('video.show',[ 'title' => $video->seo_title ]) }}">
-                                <img src="{{ \Illuminate\Support\Facades\Storage::url('uploads/images/'.$video->poster) }}" alt="" height="150" width="250">
+                                <img src="{!!\Illuminate\Support\Facades\Storage::url('uploads/images/'.$video->poster) !!}" alt="" height="200" width="350">
                             </a>
                         </div>
                     </div>
-                    <div class="col-md-offset-1 col-md-9 col-sm-12">
-                        <div class="container">
-                            <a href="{{ route('video.show',[ 'title' => $video->seo_title ]) }}">{{ $video->title }}</a>
-
+                    <div class="col-lg-7 col-sm-7 col-xs-12">
+                        <div class="description">
+                            <h3>
+                                <a href="{{ route('video.show', [ 'title' => $video->seo_title ]) }}">
+                                    {{ strlen($video->title) > 40 ? substr($video->title, 0, 40) . ' ..' : $video->title }}
+                                </a>
+                            </h3>
+                            <h4>
+                                {!! strlen($video->description) > 60 ? substr($video->description, 0, 60) . ' ..' : $video->description  !!}
+                            </h4>
+                            <h5><b>Uploaded By:</b> {{ $video->artist }}</h5>
+                            <h5>
+                                <b>Tags:</b>
+                                @foreach(unserialize($video->tags) as $tag)
+                                    {{ $tag }}
+                                @endforeach
+                            </h5>
+                            <h6>{{ title_case($video->language) }}</h6>
                         </div>
-                        {{--<div class="container">--}}
-                            {{--{!! $video->description !!}--}}
-                        {{--</div>--}}
-                        <div class="container">
-                           By {{ $video->artist }}
-                        </div>
-
-                        <div class="container">
-                            {{ $video->created_at }}
-                        </div>
-
-                        <div class="container">
-                            @foreach(unserialize($video->tags) as $tag)
-                                {{ $tag }}
-                            @endforeach
-                        </div>
-                        {{--<div class="container">--}}
-                            {{--{{ $video->language }}--}}
-                        {{--</div>--}}
-
                     </div>
                 </div>
             @endforeach
-
             {{ $videos->links() }}
         @endif
     </div>

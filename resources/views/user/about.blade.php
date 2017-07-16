@@ -4,7 +4,7 @@
 
     <!-- start container -->
     <div class="row">
-        <div class="col-lg-12 col-sm-12 about-content">
+        <div class="col-lg-12 col-sm-12 about_content">
             <h1>About Us</h1><hr>
             <div class="about_container">
                 <div class="mission">

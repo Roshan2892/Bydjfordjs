@@ -6,12 +6,23 @@
 }
 
 @media screen and (max-width:1024px) {
-    .sub-content { max-width: 100%;}
+    .sub_content { max-width: 100%;}
 }
 /* end home page */
 
 /* about page */
 @media screen and (max-width: 320px) {
-    hr { margin-top: 0px; }
+    .about_content hr { margin-top: 0px; }
+    .about_content{ max-height: 200% !important; }
 }
 /* end about page */
+
+@media screen and (max-width: 320px) {
+    .media_content .image img { width: 100%; }
+    .media_content .description{ word-wrap: break-word;}
+}
+
+@media screen and (max-width: 768px) {
+    .media_content media_content.image img { width: 100%; margin-top: 23px; }
+    .media_content .description{ width: 100%; word-wrap: break-word;}
+}
