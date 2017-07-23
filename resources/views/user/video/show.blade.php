@@ -1,5 +1,11 @@
 @extends('user.layouts.app')
-
+@section('title')
+    @if(!empty($video))
+        @foreach($video as $details)
+            {{ strtoupper($details->title) }}
+        @endforeach
+    @endif
+@endsection
 @section('content')
     <div class="container">
         <div class="row">

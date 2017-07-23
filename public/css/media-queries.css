@@ -1,8 +1,17 @@
+@media screen and (max-width: 375px) {
+    .social_links {display: none;}
+    .navbar-toggle{ margin-top: -38px;}
+}
+@media screen and (max-width: 425px) {
+    .social_links {float: right;}
+    .social_links img{width:30px;}
+}
 /* home page */
-@media screen and (max-width: 320px) {
-    hr{margin-top: 35px;}
-    .latest_media .view_more { margin: 0; }
-    .news img{ width: 228px;}
+@media screen and (max-width: 375px) {
+    .latest_media hr{margin-top: 35px;}
+    .latest_media .view_more { margin:0 0 0 5px;float:left; }
+    .news img{ width: 100%;}
+    .news_content { float: none;}
 }
 
 @media screen and (max-width:1024px) {
@@ -11,18 +20,30 @@
 /* end home page */
 
 /* about page */
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 375px) {
     .about_content hr { margin-top: 0px; }
     .about_content{ max-height: 200% !important; }
 }
 /* end about page */
 
-@media screen and (max-width: 320px) {
+/* singles, albums page */
+@media screen and (max-width: 375px) {
     .media_content .image img { width: 100%; }
     .media_content .description{ word-wrap: break-word;}
 }
-
 @media screen and (max-width: 768px) {
-    .media_content media_content.image img { width: 100%; margin-top: 23px; }
+    .media_content media_content .image img { width: 100%; margin-top: 23px; }
     .media_content .description{ width: 100%; word-wrap: break-word;}
 }
+/* singles, albums page */
+
+/* contact page */
+@media screen and (max-width:768px) {
+    .contact_container hr{margin-top: 0px;}
+    .contact_container .alert-success, .contact_container .alert-success {width: 100%;}
+    .contact_content{ padding: 0 0 50px 0;}
+    .contact_content input{ width: 100%;}
+    .contact_content input[type='submit']{ width: 100%;}
+    .contact_content textarea{width: 100%;}
+}
+/* end contact page */

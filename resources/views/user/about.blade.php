@@ -1,7 +1,9 @@
 @extends('user.layouts.app')
+@section('title')
+    ABOUT US
+@endsection
 
 @section('content')
-
     <!-- start container -->
     <div class="row">
         <div class="col-lg-12 col-sm-12 about_content">

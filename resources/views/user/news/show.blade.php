@@ -1,4 +1,11 @@
 @extends('user.layouts.app')
+@section('title')
+    @if(!empty($news))
+        @foreach($news as $details)
+            {{ strtoupper($details->title) }}
+        @endforeach
+    @endif
+@endsection
 
 @section('content')
     <div class="container">

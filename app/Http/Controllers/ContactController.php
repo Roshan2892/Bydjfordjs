@@ -19,6 +19,7 @@ class ContactController extends Controller
         $name = $contact['name'];
         $email = $contact['email'];
         $msg = $contact['message'];
+
         Mail::plain('email.contact', ['name' => $name, 'email' => $email, 'msg'=> $msg ], function ($message) use ($email,$name)
         {
             $message->from($email, $name);

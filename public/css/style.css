@@ -48,6 +48,7 @@ table {
 
 body{
     font-family: 'PT Sans';
+    font-size: 16px;
     background-image: url("../image/assets/background.png");
     background-position: 100% 20%;
     background-size:cover;
@@ -69,12 +70,15 @@ a:hover{
 hr{border-top: 4px solid #1d1818; margin-top: 0px;}
 .image{text-align: center; padding: 15px;}
 .description{ padding: 10px;}
+.navbar-brand{ font-size: 40px !important;margin-left: -16px;}
+.social_links { float: right; margin-top: 10px;}
+.social_links img{ height: 30px;}
 /* ============================ User Page ====================*/
 
 /* home page */
 .main_content{padding: 15px 15px 0 20px;}
-.sub_content{ border: 1px solid #a29999; max-width: 720px;padding-bottom: 20px; background: rgba(130, 131, 136, 0.38);}
-.news_content{float: right;border: 1px solid #a29999;padding-bottom: 20px; background: rgba(130, 131, 136, 0.38);}
+.sub_content{ border: 1px solid #a29999; max-width: 720px;padding-bottom: 20px; background: rgba(130, 131, 136, 0.78);}
+.news_content{float: right;border: 1px solid #a29999;padding-bottom: 20px; background: rgba(130, 131, 136, 0.78);}
 
 .latest_singles .latest_post_container { margin-top:15px;  padding: 20px 0 0 15px;}
 .latest_singles .view_more{margin-top: -35px; float: right;}
@@ -102,158 +106,25 @@ hr{border-top: 4px solid #1d1818; margin-top: 0px;}
 
 
 /* about page */
-.about_content{border: 1px solid #a29999;padding: 15px 20px 30px 20px; background: rgba(130, 131, 136, 0.75);}
+.about_content{border: 1px solid #a29999;padding: 15px 20px 30px 20px; background: rgba(130, 131, 136, 0.77);}
 .about_container{ margin-top: 45px;}
 .about_container .mission h2{ text-align: center;}
 .about_container .who_we_are{margin-top: 45px;}
 .about_container .who_we_are h2{ text-align: center;}
 /* end about page */
 
-/* singles page */
-.media_container { border: 1px solid #a29999;background: rgba(130, 131, 136, 0.87); padding: 15px 20px 30px 20px;}
+/* singles, albums page */
+.media_container { border: 1px solid #a29999;background: rgba(130, 131, 136, 0.78); padding: 15px 20px 30px 20px;}
 .media_content{padding-bottom: 45px;}
-/* end singles page */
+/* end singles, albums page */
 
 
-/* Contact Form */
+/* contact Form */
+.contact_container{  background: rgba(130, 131, 136, 0.78);border: 1px solid #a29999; padding-bottom: 50px; }
+.contact_container .alert-success, .contact_container .alert-success {width: 85%;}
+.contact_content {  padding: 0px 50px 30px 50px; }
+.contact_content input{height: 40px; width: 85%; color: #151313; border-radius: 0px; margin-top: 30px;padding: 25px;}
+.contact_content input[type='submit']{height: 50px;width: 85%; color: #151313; border-radius: 0px; margin-top: 30px;padding: 10px;background: #000;color:#fff;font-size:16px;}
+.contact_content textarea{width: 85%; color: #151313; border-radius: 0px; margin-top: 30px;padding: 25px;max-width: 100%;}
 
-#contact{
-    margin-top: 75px;
-}
-
-.contact_form {
-    border: 1px solid rgb(200, 200, 200);
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 5px 5px 2px;
-    background: -webkit-linear-gradient(90deg, #757575 0%, #3c2020 100%);
-    background: #757575; /* For browsers that do not support gradients */
-    background: -webkit-linear-gradient(90deg, #757575 0%, #3c2020 100%); /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(90deg, #757575 0%, #3c2020 100%); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(90deg, #757575 0%, #3c2020 100%); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(90deg, #757575 0%, #3c2020 100%);
-    border-radius: 4px;
-    top: 50px;
-    width: 80%;
-    margin: auto;
-    padding: 50px 0px 40px 0;
-}
-
-.contact_form h2{   text-align: center;
-    margin-bottom: 50px;
-    color: #fff; }
-
-.contact_group {
-    position: relative;
-    margin-bottom: 35px;
-}
-
-
-
-.contact_form .form-control {
-    font-size: 18px;
-    padding: 5px 10px 10px 5px;
-    display: block;
-    width: 70%;
-    color: #040404;
-    /*border: none;*/
-    border: 1px solid #fff;
-}
-
-.contact_form .form-control:focus {
-    outline: none;
-}
-
-/* active state */
-.contact_form .form-control:focus ~ label, .contact_form .form-control:valid ~ label {
-    top: -20px;
-    font-size: 14px;
-}
-
-
-/* BOTTOM BARS ================================= */
-.contact_form .bar {
-    position: relative;
-    display: block;
-    width: 70%;
-}
-
-.contact_form .bar:before, .contact_form .bar:after {
-    content: '';
-    height: 2px;
-    width: 0;
-    bottom: 1px;
-    position: absolute;
-    background: #fff;
-    transition: 0.2s ease all;
-    -moz-transition: 0.2s ease all;
-    -webkit-transition: 0.2s ease all;
-}
-
-.contact_form .bar:before {
-    left: 50%;
-}
-
-.contact_form .bar:after {
-    right: 50%;
-}
-
-
-
-/* active state */
-.contact_form .form-control:focus ~ .bar:before, .contact_form .form-control:focus ~ .bar:after {
-    width: 50%;
-}
-
-/* HIGHLIGHTER ================================== */
-.contact_form .highlight {
-    position: absolute;
-    height: 60%;
-    width: auto;
-    top: 25%;
-    left: auto;
-    pointer-events: none;
-    opacity: 0.5;
-    text-decoration-color: #000;
-}
-
-/* active state */
-.contact_form .form-control:focus ~ .contact_form .highlight {
-    -webkit-animation: inputHighlighter 0.3s ease;
-    -moz-animation: inputHighlighter 0.3s ease;
-    animation: inputHighlighter 0.3s ease;
-}
-
-/* ANIMATIONS ================ */
-@-webkit-keyframes inputHighlighter {
-    from {
-        background: #fff;
-    }
-
-    to {
-        width: 0;
-        background: transparent;
-    }
-}
-
-@-moz-keyframes inputHighlighter {
-    from {
-        background: #fff;
-    }
-
-    to {
-        width: 0;
-        background: transparent;
-    }
-}
-
-@keyframes inputHighlighter {
-    from {
-        background: #fff;
-    }
-
-    to {
-        width: 0;
-        background: transparent;
-    }
-}
-
-/* ============================ End User Page ====================*/
+/* end contact Form */

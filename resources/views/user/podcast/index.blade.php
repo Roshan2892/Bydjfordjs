@@ -1,5 +1,7 @@
 @extends('user.layouts.app')
-
+@section('title')
+    PODCAST
+@endsection
 @section('content')
     <div class="media_container">
         <h1>Latest Podcast</h1><hr>

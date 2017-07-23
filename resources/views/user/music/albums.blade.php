@@ -1,5 +1,7 @@
 @extends('user.layouts.app')
-
+@section('title')
+    ALBUMS
+@endsection
 @section('content')
     <div class="media_container">
         <h1>Latest Albums</h1><hr>

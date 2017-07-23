@@ -1,5 +1,7 @@
 @extends('user.layouts.app')
-
+@section('title')
+    HOME
+@endsection
 @section('content')
     <!-- start row -->
     <div class="row main_content">

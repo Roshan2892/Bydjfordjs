@@ -1,5 +1,11 @@
 @extends('user.layouts.app')
-
+@section('title')
+    @if(!empty($podcast))
+        @foreach($podcast as $details)
+            {{ strtoupper($details->title) }}
+        @endforeach
+    @endif
+@endsection
 @section('content')
     <div class="col-md-offset-3 col-md-8 col-md-offset-2">
         @if(!empty($podcast))

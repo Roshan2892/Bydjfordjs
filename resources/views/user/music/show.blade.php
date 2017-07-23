@@ -1,14 +1,22 @@
 @extends('user.layouts.app')
-
+@section('title')
+    @if(!empty($music))
+        @foreach($music as $details)
+            {{ strtoupper($details->title) }}
+        @endforeach
+    @endif
+@endsection
 @section('content')
     <div class="media_container">
         @if(!empty($music))
             @foreach($music as $details)
                 <div class="row">
-                    <div class="col-lg-8">
+                    <div class="col-lg-12">
                         <h1>{{ title_case($details->title) }}</h1><hr>
-                        <img src="{{ \Illuminate\Support\Facades\Storage::url('uploads/images/'.$details->poster) }}"
+                        {{--<div class="col-lg-offset-4 col-lg-8 ">--}}
+                            <img src="{{ \Illuminate\Support\Facades\Storage::url('uploads/images/'.$details->poster) }}"
                              width="400" height="300" alt="Poster">
+                        {{--</div>--}}
                         <span><small>{!! $details->description !!}</small></span>
                         <div class="sm2-bar-ui playlist-open">
 
