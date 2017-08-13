@@ -53,6 +53,6 @@
 <script type="text/javascript" src="{{ URL::to('/js/soundmanager2.js') }}"></script>
 <script src="{{ URL::to('/js/bar-ui.js') }}"></script>
 <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
-<script src="{{ URL::to('/js/slick.js') }}"></script>
+<script src="{{ URL::to('/js/script.js') }}"></script>
 </body>
 </html>

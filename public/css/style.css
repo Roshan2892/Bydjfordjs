@@ -71,6 +71,7 @@ hr{border-top: 4px solid #1d1818; margin-top: 0px;}
 .image{text-align: center; padding: 15px;}
 .description{ padding: 10px;}
 .navbar-brand{ font-size: 40px !important;margin-left: -16px;}
+a.navbar-brand:hover{ color:#fff;}
 .social_links { float: right; margin-top: 10px;}
 .social_links img{ height: 30px;}
 /* ============================ User Page ====================*/

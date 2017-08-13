@@ -6,10 +6,12 @@
     "type": "project",
     "require": {
         "php": ">=5.6.4",
+        "algolia/algoliasearch-client-php": "^1.18",
         "guzzlehttp/guzzle": "^6.2",
         "guzzlehttp/psr7": "^1.4",
         "laracasts/flash": "^2.0",
         "laravel/framework": "5.4.*",
+        "laravel/scout": "^3.0",
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "^5.4",
         "php-http/curl-client": "^1.7",
