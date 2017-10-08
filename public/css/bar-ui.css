@@ -22,7 +22,7 @@
     font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
     min-width: 20em;
-    max-width: 30em;
+    max-width: 100%;
     /* take out overflow if you want an absolutely-positioned playlist dropdown. */
     border-radius: 2px;
     overflow: hidden;
@@ -98,7 +98,7 @@
 .sm2-bar-ui .bd,
 .sm2-bar-ui .sm2-extra-controls {
     position: relative;
-    background-color: #aaa2a2;
+    background-color: #70767a;
     /*
     transition: background 0.2s ease-in-out;
     */
@@ -111,8 +111,7 @@
     top: 0px;
     width: 100%;
     height: 100%;
-    background-image: -moz-linear-gradient(to bottom, rgba(255,255,255,0.125) 5%, rgba(255,255,255,0.125) 45%, rgba(255,255,255,0.15) 52%, rgba(0,0,0,0.01) 51%, rgba(0,0,0,0.1) 95%); /* W3C */
-    background-image: linear-gradient(to bottom, rgba(255,255,255,0.125) 5%, rgba(255,255,255,0.125) 45%, rgba(255,255,255,0.15) 50%, rgba(0,0,0,0.1) 51%, rgba(0,0,0,0.1) 95%); /* W3C */
+   
 }
 
 .sm2-bar-ui.flat .sm2-inline-gradient {
@@ -383,6 +382,7 @@
     left: 0px;
     top: 0px;
     width: 100%;
+    font-size: 18px;
     list-style-type: none;
     overflow: hidden;
     white-space: nowrap;
@@ -803,6 +803,7 @@
 .sm2-bar-ui.playlist-open .bd.sm2-playlist-drawer {
     height: auto;
     opacity: 1;
+    max-width: 100%;
 }
 
 .sm2-bar-ui.playlist-open .bd.sm2-playlist-drawer a {
@@ -847,27 +848,35 @@
 
 .sm2-playlist-wrapper ul {
     max-height: 9.25em;
-    overflow: auto;
+    overflow-x: hidden;
 }
 
 .sm2-playlist-wrapper ul li {
     border-bottom: 1px solid rgba(0,0,0,0.05);
+    display: -webkit-box;
+    height: 45px;
+    line-height: 26px;
+    font-size: 21px;
+    margin: 5px 0 10px 0;
 }
 
 .sm2-playlist-wrapper ul li:nth-child(odd) {
     background-color: rgba(255,255,255,0.03);
+    
 }
 
 .sm2-playlist-wrapper ul li a {
     display: block;
     padding: 0.5em 0.25em 0.5em 0.75em;
-    margin-right: 0px;
+    margin-left: 1px;
     font-size: 90%;
     vertical-align: middle;
+    width: 87%;
 }
 
 .sm2-playlist-wrapper ul li a.sm2-exclude {
     display: inline-block;
+    width: 90%;
 }
 
 .sm2-playlist-wrapper ul li a.sm2-exclude .label {

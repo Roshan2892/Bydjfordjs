@@ -7,28 +7,27 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name') }}</title>
+    <title>@yield('title') : {{ env('APP_NAME') }}</title>
 
-    <!-- Scripts -->
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <!--[if lt IE 9]>
-        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
     <script>
         window.Laravel = {!! json_encode([
             'csrfToken' => csrf_token(),
         ]) !!};
     </script>
 
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
     <!-- Styles -->
-    <link rel="stylesheet" href="{{ URL::to('/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/media-queries.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.15/datatables.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jqc-1.12.4/dt-1.10.15/datatables.min.css"/>
 </head>
-<body style="background: none;">
+<body>
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
@@ -44,14 +43,15 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ route('admin.dashboard') }}">
-                        {{ config('app.name') }}
+                        BYDJFORDJS
                     </a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        @if (Auth::user())
+                        @if (Auth::guest())
+                        @else
                             <li><a href="{{ route('admin.music.show') }}">Music</a></li>
                             <li><a href="{{ route('admin.video.show') }}">Video</a></li>
                             <li><a href="{{ route('admin.podcast.show') }}">Podcast</a></li>
@@ -63,10 +63,9 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
-
                         @if (Auth::guest())
                             <li><a href="{{ route('login') }}">Login</a></li>
-                        @else
+                        @else       
                             <li><a href="{{ route('logout') }}">Logout</a></li>
                         @endif
                     </ul>
@@ -79,12 +78,14 @@
 
     <!-- Scripts -->
 
-
-    <script src="{{ asset('js/app.js') }}"></script>
     <script src="https://use.fontawesome.com/3053be66a0.js"></script>
-    <script src="{{ URL::to('tinymce/tinymce.min.js') }}"></script>
+    
+    <script src="{{ asset('js/app.js') }}"></script>
+
     <script type="text/javascript" src="{{ URL::to('js/soundmanager2.js') }}"></script>
     <script src="{{ URL::to('js/bar-ui.js') }}"></script>
+    
+   <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=swb3f9ia4qa1os7u8fazx0qdaje9ksonu7qbac05a7mvxslh"></script>
     <script>
         var editor_config = {
             path_absolute : "{{ URL::to('/') }}/",
@@ -118,6 +119,6 @@
         };
         tinymce.init(editor_config);
     </script>
-    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.15/datatables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/jqc-1.12.4/dt-1.10.15/datatables.min.js"></script>
 </body>
 </html>

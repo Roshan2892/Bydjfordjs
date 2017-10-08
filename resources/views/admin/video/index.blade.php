@@ -1,5 +1,9 @@
 @extends('admin.layouts.app')
 
+@section('title')
+    VIDEOS
+@endsection
+
 @section('content')
 	<div class="container">
 		<div class="row">
@@ -58,7 +62,7 @@
 								</tbody>
 							</table>
 						@else
-							<h3>No Videos Found !!</h3>
+							<h3>No Video Found !!</h3>
 						@endif
 					</div>
 				</div>

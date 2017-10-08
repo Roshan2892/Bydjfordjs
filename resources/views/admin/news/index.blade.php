@@ -1,4 +1,7 @@
 @extends('admin.layouts.app')
+@section('title')
+    NEWS
+@endsection
 
 @section('content')
 	<div class="container">

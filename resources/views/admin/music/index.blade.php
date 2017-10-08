@@ -1,4 +1,7 @@
 @extends('admin.layouts.app')
+@section('title')
+    MUSIC
+@endsection
 
 @section('content')
 	<div class="container">
@@ -62,7 +65,7 @@
 								</tbody>
 							</table>
 						@else
-							<h3>No Albums Found !!</h3>
+							<h3>No Music Found !!</h3>
 						@endif
 					</div>
 				</div>

@@ -36,4 +36,21 @@ class HomeController extends Controller
 
         return view('user.home', compact('singles','albums','videos','podcast','news'));
     }
+
+    public function search_page(){
+        return view('user.search');
+    }
+
+    public function search(Request $request){
+        $search_key = $request->search_key;
+
+        $albums = Album::search($search_key)->get();
+        $videos = Video::search($search_key)->get();
+        $news = News::search($search_key)->get();
+        $podcasts = Podcast::search($search_key)->get();
+
+        return view('user.search', compact("albums", "videos", "news", "podcasts"));
+    }
+
+
 }

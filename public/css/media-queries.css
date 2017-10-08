@@ -1,17 +1,71 @@
+@media only screen and (max-width: 767px) {
+  body {
+    /* The file size of this background image is 93% smaller
+       to improve page load speed on mobile internet connections */
+    background-image: url("../image/assets/background.png");
+/* Background image is centered vertically and horizontally at all times */
+  background-position: center center;
+  
+  /* Background image doesn't tile */
+  background-repeat: no-repeat;
+  
+  /* Background image is fixed in the viewport so that it doesn't move when 
+     the content's height is greater than the image's height */
+  background-attachment: fixed;
+  
+  /* This is what makes the background image rescale based
+     on the container's size */
+  background-size: cover;
+  
+  /* Set a background color that will be displayed
+     while the background image is loading */
+  background-color: #667174;
+  }
+}
+
 @media screen and (max-width: 375px) {
     .social_links {display: none;}
     .navbar-toggle{ margin-top: -38px;}
 }
 @media screen and (max-width: 425px) {
-    .social_links {float: right;}
-    .social_links img{width:30px;}
+    .social_links {float: left;}
+    .navbar-toggle{ margin-top: -44px;}
+   
 }
 /* home page */
+@media screen and (max-width: 425px) {
+     .button2{ padding: 20px 11px; }
+     .latest_media img { width: 305px; }
+}
 @media screen and (max-width: 375px) {
-    .latest_media hr{margin-top: 35px;}
-    .latest_media .view_more { margin:0 0 0 5px;float:left; }
+    .latest_media .latest_post_container { margin-top: 15px; padding: 20px 0 0 20px;}
+    .latest_media img { width: 100%;  margin-left: -10px; }
+    .latest_media hr{margin-top: 65px;}
+    .latest_media .view_more { margin:55px 0 0 5px;float:left; }
     .news img{ width: 100%;}
     .news_content { float: none;}
+ .navbar-form{padding:10px 23px;}
+    .button2 {
+	color: rgb(255, 255, 255);
+	box-shadow: rgb(0, 0, 0) 0 0px 0px 2px inset;
+        -webkit-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+	-moz-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+	-ms-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+	-o-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+	transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+	display: block;
+	margin: -55px auto;
+	
+	text-decoration: none;
+	border-radius: 4px;
+	padding: 11px 23px;
+        text-transform: uppercase;
+    }
+
+    .button2:hover {
+	color: rgba(255, 255, 255, 0.85);
+	box-shadow: rgba(0, 0, 0, 0.7) 0 80px 0px 2px inset;
+    }
 }
 
 @media screen and (max-width:1024px) {
@@ -22,20 +76,65 @@
 /* about page */
 @media screen and (max-width: 375px) {
     .about_content hr { margin-top: 0px; }
-    .about_content{ max-height: 200% !important; }
-}
+    .about_container .who_we_are .details_who {     font-size: 26px; }
+   .about_content{  height: 2440px; padding: 5px; } 
+ .about_content  .mission .mission_indian {  font-size: 26px; } 
+} 
+
+@media screen and (min-width: 376px) and (max-width: 425px) {
+    .about_content  .mission .mission_indian {  font-size: 26px; } 
+   .about_content{  height: 2300px; padding: 5px; } 
+} 
 /* end about page */
 
-/* singles, albums page */
-@media screen and (max-width: 375px) {
-    .media_content .image img { width: 100%; }
+/* singles, albums page, display page */
+@media screen and (min-width: 320px) and (max-width: 375px) {
+    .media_content .image img { width: 100%; height:250px;}
+    .media_content .detail_img img { width: 100%;height:300px; }
     .media_content .description{ word-wrap: break-word;}
+    .fa-download{padding-right: 0px;}
+    .downLoad{ display: none; }
+    .file_name { font-size: 18px !important; }
+    .sm2-playlist-wrapper ul li a { max-width: 84% !important; } 
 }
-@media screen and (max-width: 768px) {
-    .media_content media_content .image img { width: 100%; margin-top: 23px; }
-    .media_content .description{ width: 100%; word-wrap: break-word;}
+
+@media screen and (max-width: 425px) { 
+    .media_content .description .music_desc {  position: relative;
+            display: inline-block;
+            word-wrap: break-word;
+            overflow: hidden;
+            max-height: 3.6em; /* (Number of lines you want visible) * (line-height) */
+            line-height: 1.2em;
+    }
 }
-/* singles, albums page */
+@media screen and (min-width: 376px) and (max-width: 425px) { 
+    .media_content .image img{     width: 100%; height: 250px; }
+    .media_content .detail_img img { width: 100%;height:300px; }
+    .media_content .description{ word-wrap: break-word;}
+    
+    .fa-download{padding-right: 0px;}
+    .downLoad{ display: none; }
+    .file_name { font-size: 18px !important; }
+    .sm2-playlist-wrapper ul li a { max-width: 97% !important; }
+}
+
+@media screen and (min-width: 426px) and  (max-width: 768px) {
+    .media_content .image img{width: 315px; height: 250px; }
+    .media_content .detail_img img{ width: 320px; height: 350px; }
+    .media_content .description{ width: 100%; word-wrap: break-word; font-size: 18px;padding-left: 60px;    padding-top: 0px;}
+    .media_content .description .desc{ padding: 0px; }
+    .media_content .description .music_desc { margin-top: 0px; }
+    .sm2-playlist-wrapper ul li a { max-width: 79%; }
+}
+@media screen and (min-width: 769px) and  (max-width: 1024px) {
+    .media_content .image img{width:400px; height: 360px; }
+    .media_content .detail_img img{height: 360px; }
+    .media_content .description{ width: 100%; word-wrap: break-word; font-size: 18px;padding: 23px 0 0 100px;}
+    .media_content .description .desc{ padding: 0px; }
+    .sm2-playlist-wrapper ul li a { max-width: 84%; }
+}
+
+/* singles, albums page, display page */
 
 /* contact page */
 @media screen and (max-width:768px) {
@@ -47,3 +146,14 @@
     .contact_content textarea{width: 100%;}
 }
 /* end contact page */
+
+
+/* search page */
+@media screen and (max-width:425px) {
+    .search_container hr{margin-top: 0px;}
+    .search_content{ padding: 0 0 50px 0;}
+    .search_content input{ width: 70%;}
+    .search_content input[type='submit']{ width: 30%;}
+}
+/* end search page */
+

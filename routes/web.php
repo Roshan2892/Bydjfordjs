@@ -48,6 +48,11 @@ Route::get('/news', ['as' => 'news.index', 'uses'=>'NewsController@index']);
 Route::post('/subscribe', ['as' => 'subscribe', 'uses' => 'MailController@subscribe']);
 Route::get('/subscribe/{hash}', [ 'uses'=>'MailController@confirmSubscriptions', 'as'=>'confirm.subscription' ]);
 Route::get('/unsubscribe/{hash}',['uses'=>'MailController@unsubscribe', 'as'=>'unsubscribe']);
+
+/********** Search *****************/
+Route::get('/search', ['as' => 'search', 'uses' => 'HomeController@search_page']);
+Route::post('/search', ['as' => 'search', 'uses' => 'HomeController@search']);
+
 /********** Admin *****************/
 Route::group(['prefix'=>'admin'], function (){
 	Route::get('/', 'AdminController@index')->name('admin.dashboard');

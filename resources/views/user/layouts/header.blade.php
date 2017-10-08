@@ -3,12 +3,13 @@
         <!-- Branding Image -->
         <a style="font-size: 22px;" class="navbar-brand" href="{{ url('/') }}">
             {{ config('app.name') }}
+           <!-- <img src="{{ URL::to('image/assets/logo1.png') }}" alt="" >-->
         </a>
-        <div class="social_links">
-            <img src="{{ URL::to('image/assets/fb.png') }}" alt="" >
+        <div class="social_links header_share">
+           <!-- <img src="{{ URL::to('image/assets/fb.png') }}" alt="" >
             <img src="{{ URL::to('image/assets/twitter.png') }}" alt="" >
             <img src="{{ URL::to('image/assets/google.png') }}" alt="" >
-            <img src="{{ URL::to('image/assets/youtube.png') }}" alt="" >
+            <img src="{{ URL::to('image/assets/youtube.png') }}" alt="" > -->
         </div>
     </div>
 
@@ -41,21 +42,28 @@
                     <li><a href="{{ route('news.index') }}">News</a></li>
                     <li><a href="{{ route('contact.index') }}">Contact</a></li>
                 </ul>
-
-                <!-- Right Side Of Navbar -->
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <form class="navbar-form navbar-left">
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Search">
-                            </div>
-                            <button type="submit" class="btn btn-default">
-                                <i class="fa fa-search" aria-hidden="true"></i>
-                            </button>
-                        </form>
-                    </li>
-                </ul>
+                @if(!Request::is('search'))
+                    <!-- Right Side Of Navbar -->
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <form class="navbar-form" >
+                                <div class="form-group" style="display:inline;">
+                                  <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Search" onclick="goToSearch();">
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-search" onclick="goToSearch();"></span></span>
+                                  </div>
+                                </div>
+                           </form>
+                        </li>
+                    </ul>
+                @endif
             </div>
         </div>
     </nav>
 </div>
+
+<script>
+    function goToSearch() {
+        window.location.href = '{{route("search")}}';
+    }
+</script>

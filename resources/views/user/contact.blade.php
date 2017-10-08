@@ -4,9 +4,9 @@
 @endsection
 
 @section('content')
+     <!-- start container -->
     <div class="row">
-        <!-- start contact_form -->
-        <div class="col-lg-12 contact_container">
+        <div class="col-lg-12 col-sm-12 contact_container about_content">
             <h1>Get In Touch</h1><hr>
             <div class="contact_content">
                 @if (session()->has('flash_notification.message'))
@@ -19,7 +19,7 @@
                     {!! Form::text('name',  null, ['placeholder' => 'Name...','required' => 'required']) !!}
                     {!! Form::email('email',null,['placeholder' => 'Email...','required' => 'required']) !!}
                     {!! Form::textarea('message', null, ['placeholder' => 'Message...', 'rows' => '5','required' => 'required']) !!}
-                    {!! Form::submit('Send', ['class'=>'btn btn-block', 'id' => 'submit']) !!}
+                    {!! Form::submit('Send', ['class'=>'button2', 'id' => 'submit']) !!}
                 {!! Form::close() !!}
             </div>
         </div>

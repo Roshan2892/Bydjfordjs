@@ -1,4 +1,7 @@
 @extends('admin.layouts.app')
+@section('title')
+   MAIL
+@endsection
 
 @section('content')
 

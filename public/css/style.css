@@ -39,70 +39,162 @@ table {
     border-collapse: collapse;
     border-spacing: 0;
 }
+
 /* ================== end reset css =================== */
 @font-face {
     font-family: 'PT Sans';
     src:  url('../fonts/PTC55F.ttf');
 }
-
-
-body{
-    font-family: 'PT Sans';
+/*body{
+    font-family: 'Junge';
     font-size: 16px;
     background-image: url("../image/assets/background.png");
-    background-position: 100% 20%;
+    background-position: 100% 25%;
     background-size:cover;
     background-repeat: no-repeat;
     width: auto;
     height:auto;
+
+}*/
+
+body {
+  font-family: 'Antic Slab';
+  /* Location of the image */
+  background-image: url("../image/assets/background.png");
+  
+  /* Background image is centered vertically and horizontally at all times */
+  background-position: 100% 28%;
+  
+  /* Background image doesn't tile */
+  background-repeat: no-repeat;
+  
+  /* Background image is fixed in the viewport so that it doesn't move when 
+     the content's height is greater than the image's height */
+  background-attachment: fixed;
+  
+  /* This is what makes the background image rescale based
+     on the container's size */
+  background-size: cover;
+  
+  /* Set a background color that will be displayed
+     while the background image is loading */
+    background-color: #667174;
     overflow-x: hidden;
     color: #000;
     line-height: 1;
+
+}
+a{
+    color: #fff; 
 }
 
-a{
-    color: #fff;
+a:hover, a:active, a:focus {
+  /* styling for any way a link is about to be used */
+   color: #000;
+   text-decoration: none;
+   outline:0;
+   border:none;
+  -moz-outline-style: none;
 }
-a:hover{
-    color: #000;
-    text-decoration: none;
+
+h1 {
+    font-weight: 700;
+    font-family: 'Dosis';
+    font-size: 42px;
 }
-hr{border-top: 4px solid #1d1818; margin-top: 0px;}
+
+h2{     font-size: 38px;
+    
+    font-weight: 700; }
+
+h4{
+    font-family: 'Dosis';
+    font-size: 30px;
+    font-weight: 600;
+    padding-bottom: 5px;
+}
+.h5, h5{ 
+    font-size: 22px;
+    font-family: 'Dosis';
+    font-weight: 500; 
+}
+
+hr{border-top: 4px solid #1d1818;}
+
 .image{text-align: center; padding: 15px;}
+
 .description{ padding: 10px;}
+
 .navbar-brand{ font-size: 40px !important;margin-left: -16px;}
+.navbar-nav li{ font-size: 20px;font-style: italic; text-transform: uppercase; font-family: 'Dosis'; }
+.navbar-nav .dropdown-menu { background: #222; }
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+            background-color:#222;
+ }
+.navbar-nav .dropdown-menu >li >a { color: #9d9d9d; }
 a.navbar-brand:hover{ color:#fff;}
-.social_links { float: right; margin-top: 10px;}
+
+.social_links { float: right;}
+
 .social_links img{ height: 30px;}
+
+ .jssocials-share-link { border-radius: 50%; } 
+
+.button2 {
+	color: rgb(255, 255, 255);
+	box-shadow: rgb(0, 0, 0) 0 0px 0px 2px inset;
+        -webkit-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+	-moz-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+	-ms-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+	-o-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+	transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+	display: block;
+	margin: -55px auto;
+	text-decoration: none;
+	border-radius: 4px;
+	padding: 20px 30px;
+        text-transform: uppercase;
+}
+
+.button2:hover {
+	color: rgba(255, 255, 255, 0.85);
+	box-shadow: rgba(0, 0, 0, 0.7) 0 80px 0px 2px inset;
+}
+
 /* ============================ User Page ====================*/
+
+
 
 /* home page */
 .main_content{padding: 15px 15px 0 20px;}
+.main_content h2 { margin-left: 63px; }
 .sub_content{ border: 1px solid #a29999; max-width: 720px;padding-bottom: 20px; background: rgba(130, 131, 136, 0.78);}
 .news_content{float: right;border: 1px solid #a29999;padding-bottom: 20px; background: rgba(130, 131, 136, 0.78);}
-
-.latest_singles .latest_post_container { margin-top:15px;  padding: 20px 0 0 15px;}
-.latest_singles .view_more{margin-top: -35px; float: right;}
+.news_content h2 { margin-left: 0px; }
+.latest_singles .latest_post_container { margin-top:15px;  padding: 20px 0 0 30px;}
+.latest_singles .view_more{ float: right; }
 
 .latest_albums  { margin-top: 50px; }
-.latest_albums .latest_post_container { margin-top:15px;   padding: 20px 0 0 10px;}
-.latest_albums .view_more{margin-top: -35px; float: right;}
+.latest_albums .latest_post_container { margin-top:15px;   padding: 20px 0 0 30px;}
+.latest_albums .view_more{ float: right;}
 
 .latest_videos  { margin-top: 50px; }
-.latest_videos .latest_post_container { margin-top:15px;  padding: 20px 0 0 10px;}
-.latest_videos .view_more{margin-top: -35px;float: right;}
+.latest_videos .latest_post_container { margin-top:15px;  padding: 20px 0 0 30px;}
+.latest_videos .view_more{float: right;}
 
 .latest_podcast  { margin-top: 50px; }
-.latest_podcast .latest_post_container { margin-top:15px; padding: 20px 0 0 10px;}
-.latest_podcast .view_more{margin-top: -35px; float: right;}
+.latest_podcast .latest_post_container { margin-top:15px; padding: 20px 0 0 30px;}
+.latest_podcast .view_more{ float: right;}
 
 .lastest_news .latest_post_container { margin-top: 15px; }
-.lastest_news .view_more{margin-top: -35px; float: right; }
+.lastest_news .view_more{ float: right; }
 .lastest_news .latest_post_container .news{ padding-top: 25px; padding-right: 0;
     padding-left: 30px; padding-bottom: 4px;}
 .lastest_news .latest_post_container .news h4{ text-align: left;}
 .lastest_news .latest_post_container hr{border-top: 1px solid #eee;}
 .lastest_news .latest_post_container hr:last-child{display: none;}
+
+.latest_media img { width: 283px; }
 /* end home page */
 
 
@@ -111,8 +203,14 @@ a.navbar-brand:hover{ color:#fff;}
 .about_container{ margin-top: 45px;}
 .about_container .mission h2{ text-align: center;}
 .about_container .who_we_are{margin-top: 45px;}
+.about_container .who_we_are .details_who{text-align:center;font-size:27px;float:right;margin-top:20px;line-height: 35px; font-family: 'Dosis';    font-kerning: none; }
 .about_container .who_we_are h2{ text-align: center;}
+.about_container .mission { text-align: center; font-size: 27px; line-height: 50px; }
+.about_container .mission .mission_promote {   font-family: 'Dosis'; }
+.about_container .mission .mission_indian{ color: #fff;font-size: 40px;font-weight: 600;font-family: 'Antic Slab'; }
 /* end about page */
+
+
 
 /* singles, albums page */
 .media_container { border: 1px solid #a29999;background: rgba(130, 131, 136, 0.78); padding: 15px 20px 30px 20px;}
@@ -120,12 +218,41 @@ a.navbar-brand:hover{ color:#fff;}
 /* end singles, albums page */
 
 
-/* contact Form */
+
+/* Content page */
+.media_content .description { color: white; padding: 25px 0 0px 18px; }
+.media_content .description .music_desc {  word-break: break-word;margin-top: 30px; }
+.media_content .description .artist_lang { width: 100%;display: -webkit-inline-box; }
+.media_content .description .desc {  padding-top: 30px; }
+.media_content .description .desc p { font-size: 18px; margin-top: 15px; }
+.media_content .description  .artist{ text-transform: uppercase; font-size: 20px;  font-weight: bold; color: #000; }
+.media_content .description .tags{     font-style: italic; color: #000; }
+.media_content .description .file_name {     font-size: 18px; }
+.media_container .detail_video{ max-width: 90%; margin: 0 auto; white-space:pre-wrap; }
+.fa-download { padding-right: 8px; }
+.btn_download { color: #fff;height: 45px; box-shadow: rgb(0, 0, 0) 0 0px 0px 2px inset;transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360); display: block; border-radius: 4px;  text-transform: uppercase; background: #7f8085; }
+
+.btn_download:hover {
+	color: rgba(255, 255, 255, 0.85);
+	box-shadow: rgba(0, 0, 0, 0.7) 0 80px 0px 2px inset;
+}
+/* Content page */
+
+/* contact page */
 .contact_container{  background: rgba(130, 131, 136, 0.78);border: 1px solid #a29999; padding-bottom: 50px; }
 .contact_container .alert-success, .contact_container .alert-success {width: 85%;}
-.contact_content {  padding: 0px 50px 30px 50px; }
-.contact_content input{height: 40px; width: 85%; color: #151313; border-radius: 0px; margin-top: 30px;padding: 25px;}
-.contact_content input[type='submit']{height: 50px;width: 85%; color: #151313; border-radius: 0px; margin-top: 30px;padding: 10px;background: #000;color:#fff;font-size:16px;}
-.contact_content textarea{width: 85%; color: #151313; border-radius: 0px; margin-top: 30px;padding: 25px;max-width: 100%;}
+.contact_content {  padding: 0px 50px 60px 50px; }
+.contact_content input{height: 40px; width: 100%; color: #151313; border-radius: 0px; margin-top: 30px;padding: 25px;}
+.contact_content input[type='submit']{height: 50px;width: 100%; border-radius: 4px; margin-top: 30px;padding: 10px;background: #6e6e73;
+color: #fff;font-size:20px;float: left; border: 0px;}
+.contact_content textarea{width: 100%; color: #151313; border-radius: 0px; margin-top: 30px;padding: 25px;max-width: 100%;}
 
-/* end contact Form */
+/* end contact page */
+
+/* search page */
+.search_container{  background: rgba(130, 131, 136, 0.78);border: 1px solid #a29999; padding-bottom: 50px; height: 500px;}
+.search_content {  padding: 0px 50px 60px 50px; }
+.search_content input{height: 40px; width: 75%; color: #151313; border-radius: 0px; margin-top: 30px;padding: 25px;}
+.search_content input[type='submit']{height: 55px;width: 25%; border-radius: 4px; margin-top: 30px;padding: 10px;background: #6e6e73;
+    color: #fff;font-size:20px; border: 0px;float: right;}
+/* end search page */
