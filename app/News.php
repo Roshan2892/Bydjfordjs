@@ -29,11 +29,13 @@ class News extends Model
     {
         $array = $this->toArray();
 
-        /* $record['_tags'] = explode(';', $array['tags']);
+        $array['_news'] = [
+            'title' => $array['title'],
+            'tags' => $array['tags']
+        ];
 
-         $record['added_month'] = substr($record['created_at'], 0, 7);
-
-         unset($record['tags'], $record['created_at'], $record['updated_at']);*/
+        unset($array['seo_title'], $array['description'], $array['poster'], $array['file']);
+        unset($array['created_at'], $array['updated_at'],$array['seo_title'], $array['title'], $array['tags']);
 
         return $array;
     }
