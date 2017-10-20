@@ -17,49 +17,17 @@
             </div>
 
             <div class="container">
-                <h1>Search Results</h1>
+                
                 <ul class="list-group">
-                    @if(count($albums) > 0)
-                        @foreach($albums as $album)
+                    @if(isset($results_arr) && $results_arr.length > 1)
+                        <h1>Search Results</h1>
+                        @foreach($results_arr as $result)
                             <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
                                 <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1">{{ $album->title }} - <small>in Albums</small></h5>
-                                    <small>{{ $album->updated_at->diffForHumans() }} </small>
+                                    <h5 class="mb-1">{{ $result->title }}</h5>
+                                    <small>{{ $result->updated_at->diffForHumans() }} </small>
                                 </div>
                             </a>
-                        @endforeach
-                    @endif
-
-                    @if(count($videos) > 0)
-                        @foreach($videos as $video)
-                                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                                    <div class="d-flex w-100 justify-content-between">
-                                        <h5 class="mb-1">{{ $video->title }} - <small>in Videos</small></h5>
-                                        <small>{{ $video->updated_at->diffForHumans() }} </small>
-                                    </div>
-                                </a>
-                        @endforeach
-                    @endif
-
-                    @if(count($news) > 0)
-                        @foreach($news as $new)
-                                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                                    <div class="d-flex w-100 justify-content-between">
-                                        <h5 class="mb-1">{{ $new->title }} - <small>in News</small></h5>
-                                        <small>{{ $new->updated_at->diffForHumans() }} </small>
-                                    </div>
-                                </a>
-                        @endforeach
-                    @endif
-
-                    @if(count($podcasts) > 0)
-                        @foreach($podcasts as $podcast)
-                                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                                    <div class="d-flex w-100 justify-content-between">
-                                        <h5 class="mb-1">{{ $podcast->title }} - <small>in Podcast</small></h5>
-                                        <small>{{ $podcast->updated_at->diffForHumans() }} </small>
-                                    </div>
-                                </a>
                         @endforeach
                     @endif
                 </ul>

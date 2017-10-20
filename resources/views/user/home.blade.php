@@ -103,7 +103,7 @@
 
             <!-- start news -->
             <div class="lastest_news latest_media">
-                <h1>Latest News</h1>
+                <h1 style="font-size:38px;">Latest News</h1>
                 <div class="view_more">
                     <a href="{{ route('news.index') }}" class="button2">view more</a>
                 </div><hr>

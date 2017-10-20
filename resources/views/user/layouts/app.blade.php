@@ -32,7 +32,7 @@
   
 </head>
 <body>
-
+    <div class="loader"></div>
     {{--<header>--}}
         {{--<a href="{{ route('home') }}" title='Home'>--}}
             {{--<img src="{{ URL::to('/image/assets/home.png') }}" border="0" alt="" style="width:200px;height: 45px;margin-top: -3px;">--}}
@@ -71,7 +71,13 @@
    <script src="{{ URL::to('/js/slick.js') }}"></script>
    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials.min.js"></script>
    <script src="{{ URL::to('/js/jssocials.js') }}"></script>
-   
+   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+   <script type="text/javascript">
+      $(window).load(function() {
+        console.log('hi');
+        $(".loader").fadeOut("slow");
+      })
+   </script>
 
 </body>
 </html>
