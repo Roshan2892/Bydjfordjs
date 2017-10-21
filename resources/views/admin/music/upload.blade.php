@@ -11,7 +11,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h1>Music</h1>
-                        <span>* If more than one file is uploaded, it will taken as album</span>
+                        <span class="note">* If more than one file is uploaded, it will considered as album</span>
                     </div>
 
                     <div class="panel-body">

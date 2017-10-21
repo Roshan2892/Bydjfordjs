@@ -17,147 +17,187 @@ class VideoController extends Controller
 
     /* Display Video Page */
     public function index(){
-        $videos = DB::table('videos')->paginate(10);
-        return view('user.video.index', compact('videos'));
+        try{
+            $videos = DB::table('videos')->paginate(10);
+            return view('user.video.index', compact('videos'));
+        }
+        catch(\Exception $exception){
+            return view('errors.error', compact('exception'));
+        }
     }
 
     /* Display Single Video Page */
     public function show($title){
-        $video = Video::get()->where('seo_title',$title);
-        return view('user.video.show',compact('video'));
+        try{
+            $video = Video::get()->where('seo_title',$title);
+            return view('user.video.show',compact('video'));
+        }
+        catch(\Exception $exception){
+            return view('errors.error', compact('exception'));
+        }
     }
 
     /*************************** Admin Page *********************/
 
     /* Display Create Video Page */
     public function create(){
-        $language_lists= ['English','Hindi'];
-        return view('admin.video.upload', compact('language_lists'));
+        try{
+            $language_lists= ['English','Hindi'];
+            return view('admin.video.upload', compact('language_lists'));
+        }
+        catch(\Exception $exception){
+            return view('errors.error', compact('exception'));
+        }
     }
 
     /* Store Video */
     public function store(Request $request){
-        $this->validate($request,[
-            'title' => 'required|max:100',
-            'description' => 'required',
-            'poster' => 'required|image|mimes:jpeg,jpg,bmp,png',
-            'tags' => 'nullable|max:255',
-            'file' => 'required|max:500',
-            'language' => 'required|max:255',
-            'artist' => 'required|max:60'
-        ]);
+        try{
+            $this->validate($request,[
+                'title' => 'required|max:100',
+                'description' => 'required',
+                'poster' => 'required|image|mimes:jpeg,jpg,bmp,png',
+                'tags' => 'nullable|max:255',
+                'file' => 'required|max:500',
+                'language' => 'required|max:255',
+                'artist' => 'required|max:60'
+            ]);
 
-        if($request->hasFile('poster')) {
-            $file = $request->file('poster');
-            $extension = $file->getClientOriginalExtension();
-            $fileName = $file->getClientOriginalName();
-            $unique_name = md5($fileName . time());
-            $fileName = $unique_name . '.' . $extension; // renaming image
-            $destinationPath = config('app.fileDestinationPath') . '/images/' . $fileName;
+            if($request->hasFile('poster')) {
+                $file = $request->file('poster');
+                $extension = $file->getClientOriginalExtension();
+                $fileName = $file->getClientOriginalName();
+                $unique_name = md5($fileName . time());
+                $fileName = $unique_name . '.' . $extension; // renaming image
+                $destinationPath = config('app.fileDestinationPath') . '/images/' . $fileName;
 
 
-            $data = serialize($request->file);
-            $tags = serialize($request->tags);
+                $data = serialize($request->file);
+                $tags = serialize($request->tags);
 
-            $video = new Video;
-            $video->title = $request->title;
-            $video->description = $request->description;
-            $video->poster = $fileName;
-            $video->file = $data;
-            $video->artist = $request->artist;
-            $video->tags = $tags;
-            $video->language = $request->language;
-            $video->save();
-            $video->seo_title = "video_page_".$video->id;
-            $video->save();
+                $video = new Video;
+                $video->title = $request->title;
+                $video->description = $request->description;
+                $video->poster = $fileName;
+                $video->file = $data;
+                $video->artist = $request->artist;
+                $video->tags = $tags;
+                $video->language = $request->language;
+                $video->save();
+                $video->seo_title = "video_page_".$video->id;
+                $video->save();
 
-            if($video){
-                Storage::put($destinationPath, file_get_contents($file->getRealPath()));
+                if($video){
+                    Storage::put($destinationPath, file_get_contents($file->getRealPath()));
+                }
             }
+            flash('Video Added Successfully', 'success');
+            return redirect()->back();
         }
-        flash('Video Added Successfully', 'success');
-        return redirect()->back();
+        catch(\Exception $exception){
+            return view('errors.error', compact('exception'));
+        }
     }
 
 
     /* Display Video Page */
     public function showVideos()
     {
-        $video = DB::table('videos')->get();
-        return view('admin.video.index', compact('video'));
+        try{
+            $video = DB::table('videos')->get();
+            return view('admin.video.index', compact('video'));
+        }
+        catch(\Exception $exception){
+            return view('errors.error', compact('exception'));
+        }
     }
 
     /* Display Edit Video Page */
     public function edit($id)
     {
-        $video = Video::where('id', $id)->first();
-        $files = $tags = [];
-        foreach (unserialize($video->tags) as $tag) {
-            array_push($tags, $tag);
+        try{
+            $video = Video::where('id', $id)->first();
+            $files = $tags = [];
+            foreach (unserialize($video->tags) as $tag) {
+                array_push($tags, $tag);
+            }
+            foreach (unserialize($video->file) as $file) {
+                array_push($files, $file);
+            }
+            return view('admin.video.upload', compact('video','tags','files') );
         }
-        foreach (unserialize($video->file) as $file) {
-            array_push($files, $file);
+        catch(\Exception $exception){
+            return view('errors.error', compact('exception'));
         }
-        return view('admin.video.upload', compact('video','tags','files') );
     }
 
     /* Update Video Page */
     public function update(Request $request, $id)
     {
-        $tags = $files = [];
+        try{
+            $tags = $files = [];
 
-        $this->validate($request, [
-            'title' => 'required|max:100',
-            'description' => 'required',
-            'poster' => 'image|mimes:jpeg,jpg,bmp,png',
-            'tags' => 'required|max:255',
-            'file' => 'required|max:500',
-            'language' => 'required|max:255',
-            'artist' => 'required|max:60'
-        ]);
+            $this->validate($request, [
+                'title' => 'required|max:100',
+                'description' => 'required',
+                'poster' => 'image|mimes:jpeg,jpg,bmp,png',
+                'tags' => 'required|max:255',
+                'file' => 'required|max:500',
+                'language' => 'required|max:255',
+                'artist' => 'required|max:60'
+            ]);
 
-        foreach ($request->tags as $tag) {
-           array_push($tags, $tag);
+            foreach ($request->tags as $tag) {
+            array_push($tags, $tag);
+            }
+            foreach ($request->file as $file) {
+            array_push($files, $file);
+            }
+            $tags = serialize($tags);
+            $files = serialize($files);
+
+            $video = Video::find($id);
+            
+            $video->title = $request->title;
+            $video->description = $request->description;
+            $video->artist = $request->artist;
+            $video->language = $request->language;
+            $video->tags = $tags;
+            $video->file = $files;
+
+            if($request->hasFile('poster')){ 
+                $file = $request->file('poster');
+                $extension = $file->getClientOriginalExtension();
+                $fileName = $file->getClientOriginalName();
+                $unique_name = md5($fileName . time());
+                $fileName = $unique_name . '.' . $extension; // renaming image
+                $destinationPath = config('app.fileDestinationPath') . '/images/' . $fileName;
+                Storage::delete('uploads/images/'. $video->poster); //delete the file
+                $video->poster = $fileName;
+                Storage::put($destinationPath, file_get_contents($file->getRealPath()));
+            }
+
+            $video->save();
+            flash('Updated Successfully', 'success');
+            return redirect()->back();
         }
-        foreach ($request->file as $file) {
-           array_push($files, $file);
+        catch(\Exception $exception){
+            return view('errors.error', compact('exception'));
         }
-        $tags = serialize($tags);
-        $files = serialize($files);
-
-        $video = Video::find($id);
-        
-        $video->title = $request->title;
-        $video->description = $request->description;
-        $video->artist = $request->artist;
-        $video->language = $request->language;
-        $video->tags = $tags;
-        $video->file = $files;
-
-        if($request->hasFile('poster')){ 
-            $file = $request->file('poster');
-            $extension = $file->getClientOriginalExtension();
-            $fileName = $file->getClientOriginalName();
-            $unique_name = md5($fileName . time());
-            $fileName = $unique_name . '.' . $extension; // renaming image
-            $destinationPath = config('app.fileDestinationPath') . '/images/' . $fileName;
-            Storage::delete('uploads/images/'. $video->poster); //delete the file
-            $video->poster = $fileName;
-            Storage::put($destinationPath, file_get_contents($file->getRealPath()));
-        }
-
-        $video->save();
-        flash('Updated Successfully', 'success');
-        return redirect()->back();
     }
 
     /* Delete Video File */
     public function destroy($id)
     {
-        $data= Video::find($id);
-        Storage::delete('uploads/images/'.$data->poster);
-        $data->delete();
-        flash('Deleted Successfully', 'success');
-        return redirect()->back();
+        try{
+            $data= Video::find($id);
+            Storage::delete('uploads/images/'.$data->poster);
+            $data->delete();
+            flash('Deleted Successfully', 'success');
+            return redirect()->back();
+        }
+        catch(\Exception $exception){
+            return view('errors.error', compact('exception'));
+        }
     }
 }

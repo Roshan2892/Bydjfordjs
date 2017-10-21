@@ -14,12 +14,15 @@
                 {!! Form::text('search_key',  null, ['placeholder' => 'Search...','required' => 'required']) !!}
                 {!! Form::submit('search', ['class'=>'button2', 'id' => 'submit']) !!}
                 {!! Form::close() !!}
+                <img class="search-algolia" src="{{ URL::to('/image/assets/search-by-algolia.png') }}" alt="">
             </div>
 
             <div class="container">
                 
                 <ul class="list-group">
-                    @if(isset($results_arr) && $results_arr.length > 1)
+                    @if(isset($results_arr))
+
+                    <!-- {{dd($results_arr)}} -->
                         <h1>Search Results</h1>
                         @foreach($results_arr as $result)
                             <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">

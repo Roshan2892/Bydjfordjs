@@ -23,6 +23,10 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('admin.admin');
+        try{
+            return view('admin.admin');
+        }catch(\Exception $exception){
+            return view('errors.error', compact('exception'));
+        }
     }
 }

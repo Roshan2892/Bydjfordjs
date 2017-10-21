@@ -39,14 +39,18 @@ class HomeController extends Controller
 
             return view('user.home', compact('singles','albums','videos','podcast','news'));
 
-        } catch (Exception $exception) {
+        } catch (\Exception $exception) {
             return view('errors.error', compact('exception'));
         }
         
     }
 
     public function search_page(){
-        return view('user.search');
+        try{
+            return view('user.search');
+        }catch(\Exception $exception){
+            return view('errors.error', compact('exception'));
+        }
     }
 
     public function search(Request $request){
@@ -60,9 +64,10 @@ class HomeController extends Controller
 
             $podcasts = Podcast::search($search_key)->orderBy('id','desc')->get();
             array_push($results_arr, [$albums, $videos, $news, $podcasts]);
+            
             return view('user.search', compact("results_arr"));
 
-        } catch (Exception $exception) {
+        } catch (\Exception $exception) {
             return view('errors.error', compact('exception'));
         }
         
