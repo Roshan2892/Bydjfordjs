@@ -6,6 +6,7 @@ use App\News;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
+use App\Jobs\ProcessData;
 
 class NewsController extends Controller
 {
@@ -81,9 +82,10 @@ class NewsController extends Controller
                 $news->file = $data;
                 $news->tags = $tags;
                 $news->save();
+                
                 $news->seo_title = "news_page_".$news->id;
                 $news->save();
-                
+
                 if($news){
                     Storage::put($destinationPath, file_get_contents($file->getRealPath()));
                 }
