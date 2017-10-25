@@ -171,3 +171,10 @@
 }
 /* end search page */
 
+/* footer */
+@media screen and (max-width:425px) {
+    .footer-bs .footer-brand{
+        padding: 18px 25px;
+    }
+}
+/* footer */

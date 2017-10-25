@@ -3,6 +3,7 @@
 <head>
     
     <title>@yield('title') : {{ env('APP_NAME') }}</title>
+
     @include('user.layouts.header')
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -33,30 +34,11 @@
 </head>
 <body>
     <div class="loader"></div>
-    {{--<header>--}}
-        {{--<a href="{{ route('home') }}" title='Home'>--}}
-            {{--<img src="{{ URL::to('/image/assets/home.png') }}" border="0" alt="" style="width:200px;height: 45px;margin-top: -3px;">--}}
-        {{--</a>--}}
-        {{--<a href="{{ route('about') }}" title='About'>--}}
-            {{--<img src="{{ URL::to('/image/assets/about.png') }}" style="width:200px;height: 45px;margin-top: -3px;" border="0" alt="">--}}
-        {{--</a>--}}
-
-        {{--<a href="{{ route('video.index') }}" title='Video'>--}}
-            {{--<img src="{{ URL::to('/image/assets/Video.png') }}"  style="width:200px;height: 47px;margin-top: -3px;" border="0" alt="">--}}
-        {{--</a>--}}
-
-        {{--<a href="{{ route('music.index') }}" title='Music'>--}}
-            {{--<img src="{{ URL::to('/image/assets/Music.png') }}"  style="width:200px;height: 45px;margin-top: -3px;" border="0" alt="">--}}
-        {{--</a>--}}
-
-        {{--<img src="{{ URL::to('/image/assets/home_05.png') }}" style="width:550px;height: 45px;margin-top: -3px;" border="0" alt="">--}}
-    {{--</header>--}}
-
     <div class="container">
         @yield('content')
     </div>
 
-    {{--@include('user.layouts.footer')--}}
+    @include('user.layouts.footer')
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
   crossorigin="anonymous"></script>

@@ -46,6 +46,31 @@ class MailController extends Controller
                 $subscription->random_string = $randomString;
                 $subscription->subscribed = 0;
                 $subscription->save();
+
+                /*$url = env('ELASTIC_URL');
+
+                $post = array('from' => env('MAIL_FROM_ADDRESS'),
+                    'fromName' => env('MAIL_FROM_NAME'),
+                    'apikey' => env('ELASTIC_KEY'),
+                    'subject' => "$name ($email) sent you a mail from bydjfordjs.in",
+                    'to' => env('MAIL_FROM_ADDRESS'),
+                    'bodyHtml' => $msg ." <br><br><br>" . env('APP_NAME'),
+                    'isTransactional' => true);
+
+                $ch = curl_init();
+                curl_setopt_array($ch, array(
+                    CURLOPT_URL => $url,
+                    CURLOPT_POST => true,
+                    CURLOPT_POSTFIELDS => $post,
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_HEADER => false,
+                    CURLOPT_SSL_VERIFYPEER => false
+                ));
+
+                $result=curl_exec ($ch);
+                curl_close ($ch);*/
+
+
                 Mail::to($email)->send(new SubscribeToNewsletters($name, $randomString));
                 flash('A mail has been sent to your inbox', 'success');
                 return redirect()->back();

@@ -110,7 +110,7 @@ trait LfmHelpers
         }
 
         if ($type === 'url' && $base_directory !== 'public') {
-            $prefix = config('lfm.prefix', 'laravel-filemanager') . '/' . $prefix;
+            $prefix = config('lfm.url_prefix', config('lfm.prefix', 'laravel-filemanager')) . '/' . $prefix;
         }
 
         return $prefix;
@@ -257,7 +257,7 @@ trait LfmHelpers
      */
     private function removeDuplicateSlash($path)
     {
-        return str_replace($this->ds . $this->ds, $this->ds, $path);
+        return preg_replace('/\\'.$this->ds.'{2,}/', $this->ds, $path);
     }
 
     /**
@@ -456,7 +456,7 @@ trait LfmHelpers
 
             $thumb_path = $this->getThumbPath($item_name);
             $file_path = $this->getCurrentPath($item_name);
-            if ($this->imageShouldNotHaveThumb($file_path)) {
+            if (! $this->imageShouldHaveThumb($file_path)) {
                 $thumb_url = $this->getFileUrl($item_name) . '?timestamp=' . filemtime($file_path);
             } elseif (File::exists($thumb_path)) {
                 $thumb_url = $this->getThumbUrl($item_name) . '?timestamp=' . filemtime($thumb_path);
@@ -476,7 +476,7 @@ trait LfmHelpers
             'size'    => $is_file ? $this->humanFilesize(File::size($item)) : '',
             'updated' => filemtime($item),
             'path'    => $is_file ? '' : $this->getInternalPath($item),
-            'time'    => date('Y-m-d h:m', filemtime($item)),
+            'time'    => date('Y-m-d h:i', filemtime($item)),
             'type'    => $file_type,
             'icon'    => $icon,
             'thumb'   => $thumb_url,
@@ -493,7 +493,7 @@ trait LfmHelpers
     public function createFolderByPath($path)
     {
         if (! File::exists($path)) {
-            File::makeDirectory($path, 0777, true, true);
+            File::makeDirectory($path, config('lfm.create_folder_mode', 0755), true, true);
         }
     }
 
@@ -527,12 +527,18 @@ trait LfmHelpers
      * @param  mixed  $file  Real path of a file or instance of UploadedFile.
      * @return bool
      */
-    public function imageShouldNotHaveThumb($file)
+    public function imageShouldHaveThumb($file)
     {
-        $mine_type = $this->getFileType($file);
-        $noThumbType = ['image/gif', 'image/svg+xml'];
+        if (! config('lfm.should_create_thumbnails', true)) {
+            return false;
+        }
 
-        return in_array($mine_type, $noThumbType);
+        $mime_type = $this->getFileType($file);
+
+        return in_array(
+            $mime_type,
+            config('lfm.raster_mimetypes', ['image/jpeg', 'image/pjpeg', 'image/png'])
+        );
     }
 
     /**

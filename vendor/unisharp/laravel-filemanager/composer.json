@@ -25,6 +25,7 @@
   "require": {
     "php": ">=5.4.0",
     "ext-exif": "*",
+    "ext-fileinfo": "*",
     "illuminate/support": ">=4.2.0",
     "intervention/image": "2.*"
   },
@@ -43,6 +44,19 @@
     }
   },
   "bin": ["bin/debug"],
+  "scripts": {
+    "post-install-cmd": [
+      "php artisan vendor:publish --tag=lfm_config",
+      "php artisan vendor:publish --tag=lfm_public",
+      "php artisan route:clear",
+      "php aritsan config:clear"
+    ],
+    "post-update-cmd": [
+      "php artisan vendor:publish --tag=lfm_public --force",
+      "php artisan route:clear",
+      "php aritsan config:clear"
+    ]
+  },
   "extra": {
     "laravel": {
       "providers": [

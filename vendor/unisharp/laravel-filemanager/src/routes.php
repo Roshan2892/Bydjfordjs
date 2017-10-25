@@ -4,7 +4,7 @@ $middleware = array_merge(\Config::get('lfm.middlewares'), [
     '\Unisharp\Laravelfilemanager\middlewares\MultiUser',
     '\Unisharp\Laravelfilemanager\middlewares\CreateDefaultFolder',
 ]);
-$prefix = \Config::get('lfm.prefix', 'laravel-filemanager');
+$prefix = \Config::get('lfm.url_prefix', \Config::get('lfm.prefix', 'laravel-filemanager'));
 $as = 'unisharp.lfm.';
 $namespace = '\Unisharp\Laravelfilemanager\controllers';
 
@@ -91,7 +91,7 @@ Route::group(compact('middleware', 'prefix', 'as', 'namespace'), function () {
         'as' => 'getDelete',
     ]);
 
-    Route::get('/demo', 'DemoController@index');
+    // Route::get('/demo', 'DemoController@index');
 });
 
 Route::group(compact('prefix', 'as', 'namespace'), function () {
@@ -100,6 +100,6 @@ Route::group(compact('prefix', 'as', 'namespace'), function () {
     $files_url = '/' . \Config::get('lfm.files_folder_name') . '/{base_path}/{file_name}';
     Route::get($images_url, 'RedirectController@getImage')
         ->where('image_name', '.*');
-    Route::get($files_url, 'RedirectController@getFIle')
+    Route::get($files_url, 'RedirectController@getFile')
         ->where('file_name', '.*');
 });
