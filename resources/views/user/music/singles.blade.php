@@ -29,11 +29,10 @@
                         </h5>
                         <h5 class="music_artist"><b>Artist:</b> {{ $music->artist }}</h5>
                         <h5 class="music_tags">
-                                <b>Tags:</b>
-                                @foreach(unserialize($music->tags) as $tag)
-                                     {{ $tag }}
-                                @endforeach
-                           
+                            <b>Tags:</b>
+                            @foreach(unserialize($music->tags) as $tag)
+                                 {{ $tag }}
+                            @endforeach
                         </h5>
                         <h5 class="music_lang">{{ title_case($music->language) }}</h5>
                     </div>

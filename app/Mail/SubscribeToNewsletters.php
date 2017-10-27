@@ -12,13 +12,13 @@ class SubscribeToNewsletters extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $name, $randomString;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-
-    public $name, $randomString;
 
     public function __construct($name, $randomString)
     {

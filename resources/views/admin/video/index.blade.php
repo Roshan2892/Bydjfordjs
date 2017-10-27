@@ -43,9 +43,7 @@
 										</td>
 										<td>{!! $new->artist !!}</td>
 										<td>
-											@foreach(unserialize($new->tags) as $tag)
-												{{ $tag }}
-											@endforeach
+											{{ $new->tags }}
 										</td>
 										<td>{!! $new->language !!}</td>
 										<td>

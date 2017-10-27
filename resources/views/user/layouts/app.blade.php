@@ -19,8 +19,9 @@
     <meta name="Distribution" content="Global">
     <meta name="Robots" content="INDEX,FOLLOW">
     <meta name="Revisit-after" content="7 Days">
-    
-    
+
+    <link rel="shortcut icon" href="{{ URL::to('image/assets/favicon.io') }}" type="image/x-icon">
+    <link rel="icon" href="{{ URL::to('image/assets/favicon.io') }}" type="image/x-icon">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Antic+Slab|Dosis" rel="stylesheet">
     <link rel="stylesheet" href="{{ URL::to('/css/style.css') }}">

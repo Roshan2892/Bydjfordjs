@@ -1,10 +1,10 @@
-<b>{{ $name }}</b> ({{$email}}) sent you a mail from <u>bydjfordjs.in</u> <br><br><br>
+@component('mail::message')
 
+@component('mail::panel')
 {{ $msg }}
+@endcomponent
 
-
-<br><br><br>
-{{ config('app.name') }}
+@endcomponent
 
 
 

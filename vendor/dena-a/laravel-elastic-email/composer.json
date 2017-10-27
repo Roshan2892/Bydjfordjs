@@ -1,0 +1,23 @@
+{
+	"name": "dena-a/laravel-elastic-email",
+	"description": "Wrapper for Elastic Email HTTP api to send mails using laravel",
+	"type": "library",
+	"homepage": "https://github.com/dena-a/laravel-elastic-email",
+	"license": "MIT",
+	"keywords": ["laravel", "email", "elastic", "elasticemail"],
+	"authors": [
+		{
+			"name": "Dena Ajdari",
+			"email": "dena.ajdari@gmail.com"
+		}
+	],
+	"minimum-stability": "stable",
+	"require": {
+		"laravel/framework": "5.4.x"
+	},
+	"autoload": {
+		"psr-4": {
+			"Dena\\LaravelElasticEmail\\": "src"
+		}
+	}
+}

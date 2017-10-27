@@ -19,6 +19,9 @@ class VideoController extends Controller
     public function index(){
         try{
             $videos = DB::table('videos')->paginate(10);
+//            foreach($videos as $video){
+//                $video->tags = implode(', ', unserialize($video->tags));
+//            }
             return view('user.video.index', compact('videos'));
         }
         catch(\Exception $exception){
@@ -30,7 +33,12 @@ class VideoController extends Controller
     public function show($title){
         try{
             $video = Video::get()->where('seo_title',$title);
-            return view('user.video.show',compact('video'));
+//            $tags = [];
+//            foreach($video as $v) {
+//                $tags = unserialize($v->tags);
+//            }
+//            $tags = implode(', ', $tags);
+            return view('user.video.show',compact('video', 'tags'));
         }
         catch(\Exception $exception){
             return view('errors.error', compact('exception'));
@@ -105,6 +113,9 @@ class VideoController extends Controller
     {
         try{
             $video = DB::table('videos')->get();
+            foreach($video as $v){
+                $v->tags = implode(', ', unserialize($v->tags));
+            }
             return view('admin.video.index', compact('video'));
         }
         catch(\Exception $exception){

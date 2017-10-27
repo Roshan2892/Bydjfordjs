@@ -21,6 +21,9 @@ class MusicController extends Controller
     public function showSingles(){
         try{
             $musics = DB::table('albums')->where('filecount','=',1)->paginate(10);
+//            foreach($musics as $music){
+//                $music->tags = implode(', ', unserialize($music->tags));
+//            }
             return view('user.music.singles', compact('musics'));
         }
         catch(\Exception $exception){
@@ -33,6 +36,9 @@ class MusicController extends Controller
     public function showAlbum(){
         try{
             $musics = DB::table('albums')->where('filecount','>',1)->paginate(10);
+//            foreach($musics as $music){
+//                $music->tags = implode(', ', unserialize($music->tags));
+//            }
             return view('user.music.albums', compact('musics'));
         }catch(\Exception $exception){
             return view('errors.error', compact('exception'));
@@ -43,11 +49,14 @@ class MusicController extends Controller
     public function show($title){
         try{
             $music = Album::get()->where('seo_title',$title);
+//            $tags = [];
             foreach($music as $m) {
                 $files = unserialize($m->file);
                 $fileNames = unserialize($m->filename);
+//                $tags = unserialize($m->tags);
             }
-            return view('user.music.show',compact('music','files','fileNames'));
+//            $tags = implode(', ', $tags);
+            return view('user.music.show',compact('music','files','fileNames', 'tags'));
         }catch(\Exception $exception){
             return view('errors.error', compact('exception'));
         }
@@ -255,6 +264,9 @@ class MusicController extends Controller
     public function showAlbums(){
         try{
             $music = DB::table('albums')->get();
+            foreach($music as $m){
+                $m->tags = implode(', ', unserialize($m->tags));
+            }
             return view('admin.music.index', compact('music'));
         }catch(\Exception $exception){
             return view('errors.error', compact('exception'));

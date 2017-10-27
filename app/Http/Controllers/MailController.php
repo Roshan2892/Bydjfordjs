@@ -47,30 +47,6 @@ class MailController extends Controller
                 $subscription->subscribed = 0;
                 $subscription->save();
 
-                /*$url = env('ELASTIC_URL');
-
-                $post = array('from' => env('MAIL_FROM_ADDRESS'),
-                    'fromName' => env('MAIL_FROM_NAME'),
-                    'apikey' => env('ELASTIC_KEY'),
-                    'subject' => "$name ($email) sent you a mail from bydjfordjs.in",
-                    'to' => env('MAIL_FROM_ADDRESS'),
-                    'bodyHtml' => $msg ." <br><br><br>" . env('APP_NAME'),
-                    'isTransactional' => true);
-
-                $ch = curl_init();
-                curl_setopt_array($ch, array(
-                    CURLOPT_URL => $url,
-                    CURLOPT_POST => true,
-                    CURLOPT_POSTFIELDS => $post,
-                    CURLOPT_RETURNTRANSFER => true,
-                    CURLOPT_HEADER => false,
-                    CURLOPT_SSL_VERIFYPEER => false
-                ));
-
-                $result=curl_exec ($ch);
-                curl_close ($ch);*/
-
-
                 Mail::to($email)->send(new SubscribeToNewsletters($name, $randomString));
                 flash('A mail has been sent to your inbox', 'success');
                 return redirect()->back();
@@ -120,12 +96,15 @@ class MailController extends Controller
 
             $subject = $request['subject'];
             $message = $request['description'];
-            $subscription = Subscription::get()->where('subscribed', 1);
+            $subscription = Subscription::where('subscribed', 1)->get();
+
             foreach ($subscription as $sub) {
-                Mail::to($sub->email)->queue(new SendBulkMails($sub->email, $sub->name, $subject, $message));
+                Mail::to($sub->email)->send(new SendBulkMails($sub->email, $sub->name, $subject, $message));
             }
+
             flash('Mail has been sent', 'success');
             return redirect()->back();
+
         }catch(\Exception $exception){
             return view('errors.error', compact('exception'));
         }

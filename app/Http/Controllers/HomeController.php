@@ -61,11 +61,21 @@ class HomeController extends Controller
             $albums = Album::search($search_key)->orderBy('id','desc')->get();
             $videos = Video::search($search_key)->orderBy('id','desc')->get();
             $news = News::search($search_key)->orderBy('id','desc')->get();
+            $podcast = Podcast::search($search_key)->orderBy('id','desc')->get();
 
-            $podcasts = Podcast::search($search_key)->orderBy('id','desc')->get();
-            array_push($results_arr, [$albums, $videos, $news, $podcasts]);
-            
-            return view('user.search', compact("results_arr"));
+            if(count($albums) > 0)
+                array_push($results_arr, $albums);
+            if(count($videos) > 0)
+                array_push($results_arr, $videos);
+            if(count($news) > 0)
+                array_push($results_arr, $news);
+            if(count($podcast) > 0)
+                array_push($results_arr, $podcast);
+
+            if(count($results_arr) > 0)
+                return view('user.search', compact("results_arr"));
+            else
+                return view('user.search', [ 'no_result' => 'No Result Found']);
 
         } catch (\Exception $exception) {
             return view('errors.error', compact('exception'));

@@ -11,14 +11,16 @@ class SendBulkMails extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
+    public $email, $name, $message, $subject;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public $email, $name, $message, $subject;
+
     public function __construct($email, $name, $subject, $message)
     {
+
         $this->email = $email;
         $this->name = $name;
         $this->subject = $subject;
@@ -32,6 +34,7 @@ class SendBulkMails extends Mailable implements ShouldQueue
      */
     public function build()
     {
+
         return $this->markdown('email.send_bulk_mails')
             ->subject($this->subject)
             ->with([

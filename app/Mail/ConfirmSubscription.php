@@ -11,12 +11,12 @@ class ConfirmSubscription extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $name, $randomString, $email;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public $name, $randomString, $email;
 
     public function __construct($name, $randomString, $email)
     {

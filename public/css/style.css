@@ -282,6 +282,7 @@ color: #fff;font-size:20px;float: left; border: 0px;}
     padding: 26px 40px 14px 40px;
     color: rgba(255,255,255,1.00);
     border-top-left-radius: 0px;
+    margin-top: 30px;
 }
 .footer-bs .footer-brand, .footer-bs .footer-nav, .footer-bs .footer-social, .footer-bs .footer-ns { padding:10px 25px; }
 .footer-bs .footer-nav, .footer-bs .footer-social, .footer-bs .footer-ns { border-color: transparent; }

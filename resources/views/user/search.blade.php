@@ -21,8 +21,6 @@
                 
                 <ul class="list-group">
                     @if(isset($results_arr))
-
-                    <!-- {{dd($results_arr)}} -->
                         <h1>Search Results</h1>
                         @foreach($results_arr as $result)
                             <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
@@ -32,6 +30,8 @@
                                 </div>
                             </a>
                         @endforeach
+                    @elseif(isset($no_result))
+                        <h4>No Results Found</h4>
                     @endif
                 </ul>
             </div>
