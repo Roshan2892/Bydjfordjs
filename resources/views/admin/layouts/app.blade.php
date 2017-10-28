@@ -42,6 +42,7 @@
                         <span class="icon-bar"></span>
                     </button>
 
+                    
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ route('admin.dashboard') }}">
                         BYDJFORDJS
@@ -65,8 +66,10 @@
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @if (Auth::guest())
-                            <li><a href="{{ route('login') }}">Login</a></li>
+                            <li><a href="{{ route('home') }}"><i class="fa fa-long-arrow-left" aria-hidden="true"></i>&nbsp; Back to the website</a></li>
+                            <!-- <li><a href="{{ route('admin.login') }}">Login</a></li> -->
                         @else       
+                            <li><a href="{{ route('admin.register') }}">Register</a></li>
                             <li><a href="{{ route('logout') }}">Logout</a></li>
                         @endif
                     </ul>

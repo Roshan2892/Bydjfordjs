@@ -154,10 +154,10 @@ trait AuthenticatesUsers
     public function logout(Request $request)
     {
         $this->guard()->logout();
-
         $request->session()->invalidate();
-
-        return redirect('/');
+        
+        // return redirect('/');
+        return redirect()->intended(route('admin.login'));
     }
 
     /**
