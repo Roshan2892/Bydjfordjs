@@ -37,7 +37,7 @@ class SubscribeToNewsletters extends Mailable
             ->subject('Bydjfordjs - Subscribe to Newsletters')
             ->with([
                 'name' => $this->name,
-                'url' => 'http://127.0.0.1:8000/subscribe/'.$this->randomString
+                'url' => env('APP_URL').'/subscribe/'.$this->randomString
             ]);
     }
 }

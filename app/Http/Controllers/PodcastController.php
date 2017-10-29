@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Podcast;
+use App\Http\Requests\UploadRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Validator;
-
 
 class PodcastController extends Controller
 {
@@ -67,70 +66,34 @@ class PodcastController extends Controller
         }
     }
 
-    /* Store Podcast */
-    public function store(Request $request){
+    /* Store Podcast Into Database */
+    public function store(UploadRequest $request){
         try{
             $destinationFile = $orginalFiles =  [];
-            $this->validate($request,[
-                'title' => 'required|max:100',
-                'description' => 'required',
-                'poster' => 'required|image|mimes:jpeg,jpg,bmp,png',
-                'tags' => 'required|max:255',
-                'language' => 'required|max:255',
-                'artist' => 'required|max:60'
-            ]); 
 
             $poster_file = $request->file('poster');
             $poster_extension = $poster_file->getClientOriginalExtension();
             $poster_fileName = $poster_file->getClientOriginalName();
-            
             $poster_unique_name = md5($poster_fileName . time());
             $poster_fileName = $poster_unique_name . '.' . $poster_extension; // renaming image file
             $poster_destinationPath = config('app.fileDestinationPath') . '/images/' . $poster_fileName;
-            
+
             $files = $request->file('file');
+
             foreach($files as $file){
+
                 $extension = $file->getClientOriginalExtension();
                 $fileName= $file->getClientOriginalName();
-                $maxFileSize = config('app.maxFileSize');
-                $validator = Validator::make(
-                    array(
-                        'file'              =>      $file,
-                        'extension'         =>      $extension,
-                    ),
-                    [
-                        'file'              =>      'required|max:'.$maxFileSize,
-                        'extension'         =>      'required|in:mp3,mp4',
-                    ],[
-                        'file.required' => 'File is Required',
-                        'extension.mimes' => 'File Should be of type mp3,mp4'
-                    ]
-                );
-                if($validator->fails()){
-                    $errors = $validator->errors();
-                    return redirect()->back()->withInput()->withErrors($errors);
-                }else {
-                    /*
-                        original File that will be used for display purpose
-                    */
-                    $orignalFileName = pathinfo($fileName, PATHINFO_FILENAME); // get original file name. 
-            
-                    /* 
-                        Unique name generated to be stored on disk 
-                    */
-                    $unique_name = md5($fileName . time()); // renaming file name
-                    $fileChangedName = $unique_name . '.' . $extension; 
+                $orignalFileName = pathinfo($fileName, PATHINFO_FILENAME); // get original file name.
 
+                $unique_name = md5($fileName . time()); // renaming file name
+                $fileChangedName = $unique_name . '.' . $extension;
 
-                    /* 
-                        Store on disk 
-                    */
-                    $destinationPath = config('app.fileDestinationPath') . '/files/' .  $fileChangedName;
-                    $uploaded = Storage::put($destinationPath, file_get_contents($file->getRealPath()));
-                }
+                $destinationPath = config('app.fileDestinationPath') . '/files/' .  $fileChangedName;
+                $uploaded = Storage::put($destinationPath, file_get_contents($file->getRealPath()));
 
-                array_push($destinationFile,$fileChangedName); // created array for storing unique file names 
-                array_push($orginalFiles, $orignalFileName); // created array for stroing original file names
+                array_push($destinationFile,$fileChangedName); // created array for storing unique file names
+                array_push($orginalFiles, $orignalFileName); // created array for storing original file names
             }
 
             $poster_uploaded = Storage::put($poster_destinationPath, file_get_contents($poster_file->getRealPath()));
@@ -151,14 +114,14 @@ class PodcastController extends Controller
                 $podcast->tags = $tags;
                 $podcast->language = $request->language;
                 $podcast->save();
+
                 $podcast->seo_title = "podcast_page_".$podcast->id;
                 $podcast->save();
-                
+
                 flash('Podcast Added Successfully', 'success');
                 return redirect()->back();
             }
-        }
-        catch(\Exception $exception){
+        }catch(\Exception $exception){
             return view('errors.error', compact('exception'));
         }
     }

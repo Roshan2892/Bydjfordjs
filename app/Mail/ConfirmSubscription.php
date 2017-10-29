@@ -36,7 +36,7 @@ class ConfirmSubscription extends Mailable
             ->subject('Welcome to Bydjfordjs')
             ->with([
                 'name' => $this->name,
-                'url' => 'http://127.0.0.1:8000/unsubscribe/'.$this->email
+                'url' => env('APP_URL').'/unsubscribe/'.$this->email
             ]);
     }
 }

@@ -23,12 +23,14 @@
                     @if(isset($results_arr))
                         <h1>Search Results</h1>
                         @foreach($results_arr as $result)
-                            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1">{{ $result->title }}</h5>
-                                    <small>{{ $result->updated_at->diffForHumans() }} </small>
-                                </div>
-                            </a>
+                            @foreach($result as $res)
+                                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h5 class="mb-1">{{ $res->title }}</h5>
+                                        <small>{{ $res->updated_at->diffForHumans() }} </small>
+                                    </div>
+                                </a>
+                            @endforeach
                         @endforeach
                     @elseif(isset($no_result))
                         <h4>No Results Found</h4>

@@ -69,7 +69,7 @@ class MailController extends Controller
                     ->where('id',$subscription->id)
                     ->update(['subscribed' => 1]);
                 Mail::to($email)->send(new ConfirmSubscription($name, $randomString, $email));
-                flash('You are now subscribed', 'success');
+                flash('Welcome to the bydjfordjs family, you are now subscribed. Thank you!!', 'success');
             }
             return redirect()->to('/');
         }catch(\Exception $exception){
@@ -99,10 +99,10 @@ class MailController extends Controller
             $subscription = Subscription::where('subscribed', 1)->get();
 
             foreach ($subscription as $sub) {
-                Mail::to($sub->email)->send(new SendBulkMails($sub->email, $sub->name, $subject, $message));
+                Mail::to($sub->email)->queue(new SendBulkMails($sub->email, $sub->name, $subject, $message));
             }
 
-            flash('Mail has been sent', 'success');
+            flash('Mail has been sent to all the registered subscribers', 'success');
             return redirect()->back();
 
         }catch(\Exception $exception){
@@ -118,7 +118,7 @@ class MailController extends Controller
 
             if($subscription->subscribed == 1){
                 DB::table('subscriptions')->where('email',$email)->delete();
-                flash('You are unsubscribed', 'danger');
+                flash('You have now un-subscribed, sorry to see you leave!', 'danger');
             }
             return redirect()->to('/');
         }catch(\Exception $exception){

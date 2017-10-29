@@ -9,12 +9,12 @@
         <div class="col-lg-12 col-sm-12 contact_container about_content">
             <h1>Get In Touch</h1><hr>
             <div class="contact_content">
-                @if (session()->has('flash_notification.message'))
-                    <div class="alert alert-{{ session('flash_notification.level') }}">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                        {!! session('flash_notification.message') !!}
-                    </div>
-                @endif
+                {{--@if (session()->has('flash_notification.message'))--}}
+                    {{--<div class="alert alert-{{ session('flash_notification.level') }}">--}}
+                        {{--<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>--}}
+                        {{--{!! session('flash_notification.message') !!}--}}
+                    {{--</div>--}}
+                {{--@endif--}}
                 {!! Form::open(['route'=>'contact.send'], ['class' => 'form-horizontal']) !!}
                     {!! Form::text('name',  null, ['placeholder' => 'Name...','required' => 'required']) !!}
                     {!! Form::email('email',null,['placeholder' => 'Email...','required' => 'required']) !!}

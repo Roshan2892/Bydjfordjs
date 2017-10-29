@@ -29,7 +29,7 @@ class Video extends Model
     {
         $array = $this->toArray();
 
-        $array['_podcast'] = [
+        $array['_videos'] = [
             'title' => $array['title'],
             'artist' => $array['artist'],
             'tags' => $array['tags']

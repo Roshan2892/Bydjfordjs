@@ -35,8 +35,14 @@ class ContactController extends Controller
 //            });
 
             Mail::to(env('MAIL_FROM_ADDRESS'))->send(new ContactMail($name, $email, $msg));
-            flash('Message sent', 'success');
-            return view('user.contact');
+
+            if(Mail::failures()){
+                $message = 'Unable to send message';
+                return redirect()->back()->withInput();
+            }else {
+                flash('Thank you for contacting us, we\'ll respond back very soon', 'success');
+                return redirect('/contact');
+            }
         }catch(\Exception $exception){
             return view('errors.error', compact('exception'));
         }

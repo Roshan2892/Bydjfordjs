@@ -40,7 +40,7 @@ class SendBulkMails extends Mailable implements ShouldQueue
             ->with([
                 'name' => $this->name,
                 'desc' => $this->message,
-                'url' => 'http://127.0.0.1:8000/unsubscribe/'.$this->email
+                'url' => env('APP_URL').'/unsubscribe/'.$this->email
             ]);
     }
 }
